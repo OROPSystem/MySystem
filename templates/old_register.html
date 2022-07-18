@@ -1,0 +1,98 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{#{% from '_render_field.html' import render_single_field_no_label %}#}
+
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='Bootstrap/bootstrap@4.6.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='base/css/application.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='base/img/logotext-brain.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/signin.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/util.css') }}">
+{% endblock %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block content %}
+
+
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login50">
+                <div class="login100-pic js-tilt" data-tilt>
+                    <img src="{{ url_for('static', filename='base/img/logotext-brain.png') }}" alt="m2l">
+                </div>
+
+                <form class="login100-form validate-form" method="POST" action="{{ url_for('user.login') }}">
+					<span class="login100-form-title">
+						Member <b>Register</b>
+					</span>
+                    <div class="wrap-input100 validate-input">
+                        <input type="text" class="form-control, input100" name="username" , placeholder="Username">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+							<i class="fa fa-user" aria-hidden="true"></i>
+						</span>
+                    </div>
+                    <div class="text-danger mb-1" style="text-align: center">用户名不少于5个字符</div>
+                    <div class="wrap-input100 validate-input">
+                        <input type="email" class="form-control, input100" name="email" , placeholder="Email">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+							<i class="fa fa-user" aria-hidden="true"></i>
+						</span>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control input100" name="captcha" placeholder="Captcha">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+							<i class="fa fa-user" aria-hidden="true"></i>
+						</span>
+                            <div class="input-group-append ">
+                                <button class="btn login100-form-btn" type="button" id="captcha-button">获取验证码
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Password is required">
+                        <input type="password" class="form-control, input100" id="exampleInputPassword1" name="password"
+                               , placeholder="Password">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+                    </div>
+                    <div class="text-danger mb-1" style="text-align: center">密码不少于6位</div>
+                    <div class="wrap-input100 validate-input">
+                        <input type="password" class="form-control, input100" name="password_confirm" ,
+                               placeholder="Confirm Password">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+                    </div>
+                    <div class="form-group" style="text-align: center">
+                        {% for message in get_flashed_messages() %}
+                            <div class="text-danger">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-block btn-primary login100-form-btn" type="submit">
+                            Register
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+{% endblock %}

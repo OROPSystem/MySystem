@@ -1,0 +1,97 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}
+    Login and Register
+{% endblock %}
+
+
+
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='Bootstrap/bootstrap@4.6.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login_register.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="form-box">
+            <form action="{{ url_for('user.register') }}" method="post" class="register-box hidden">
+                <!-- 注册 -->
+                <h1>register</h1>
+                <input type="text" placeholder="用户名" name="username">
+                <input type="email" placeholder="邮箱" name="email">
+                <div style="width: 70%;vertical-align: middle">
+                    <input type="text" class="" name="captcha" placeholder="验证码" style="float: left;width: 60%">
+                    <button class="btn2 btn1" id="captcha-btn" type="button">获取验证码</button>
+                </div>
+                <input type="password" placeholder="密码" name="password">
+                <input type="password" placeholder="确认密码" name="password_confirm">
+                <input type="submit" class="btn1" value="注册">
+            </form>
+
+            <!-- 登录 -->
+            <form action="{{ url_for('user.login') }}" method="post" class="login-box">
+                <h1>login</h1>
+                <input type="text" placeholder="用户名" name="username" value="{{ username }}">
+                {% if form %}
+                    <p class="text-danger">{{ form.username.errors[0] }}</p>
+                {% endif %}
+                <input type="password" placeholder="密码" name="password" value="{{ password }}">
+                {% if form %}
+                    <p class="text-danger">{{ form.password.errors[0] }}</p>
+                {% endif %}
+                <div class="checkbox">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember" style="color: #fff;font-size: 18px;float: left">Remember me</label>
+                </div>
+
+                <button class="btn1">登录</button>
+                <div class="forget-con">
+                    <a href="#" id="forget">Forgot Username / Password?</a>
+                </div>
+
+            </form>
+        </div>
+        <div class="con-box left">
+            {#            <h2>欢迎来到<span>宠物之家</span></h2>#}
+            {#            <p>快来领取你的专属<span>宠物</span>吧</p>#}
+            <img src="{{ url_for('static', filename='base/img/logotext-brain.png') }}" alt="">
+            <p>已有账号</p>
+            <button id="login" class="btn1">去登录</button>
+        </div>
+        <div class="con-box right">
+            {#            <h2>欢迎来到<span>宠物之家</span></h2>#}
+            {#            <p>快来看看你的可爱<span>宠物</span>吧</p>#}
+            <img src="{{ url_for('static', filename='base/img/logotext-brain.png') }}">
+            <p>没有账号？</p>
+            <button id="register" class="btn1">去注册</button>
+        </div>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    {#    <script type=“text/javascript” src="{{ url_for('static', filename='Axios/Axios@0.25.0.min.js') }}"></script>#}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/register.js') }}"></script>
+    <script>
+        // 要操作到的元素
+        let login = document.getElementById('login');
+        let register = document.getElementById('register');
+        let form_box = document.getElementsByClassName('form-box')[0];
+        let register_box = document.getElementsByClassName('register-box')[0];
+        let login_box = document.getElementsByClassName('login-box')[0];
+        let checkbox = document.getElementById('remember');
+        // 去注册按钮点击事件
+        register.addEventListener('click', () => {
+            form_box.style.transform = 'translateX(85%)';
+            login_box.classList.add('hidden');
+            register_box.classList.remove('hidden');
+        })
+        // 去登录按钮点击事件
+        login.addEventListener('click', () => {
+            form_box.style.transform = 'translateX(-5%)';
+            register_box.classList.add('hidden');
+            login_box.classList.remove('hidden');
+        })
+
+        // 多选框状态
+        checkbox.checked = Boolean({{ remember }});
+    </script>
+{% endblock %}

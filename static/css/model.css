@@ -1,0 +1,95 @@
+/*.layer {*/
+/*    border: .15rem solid #333;*/
+/*    width: 10rem;*/
+/*    font-size: 1.125rem;*/
+/*    border-radius: 1rem;*/
+/*    overflow: hidden;*/
+/*}*/
+
+/*.layer a:hover {*/
+/*    width: 100%;*/
+/*    padding: 0;*/
+/*    text-decoration: none;*/
+/*    background-color: lightgrey;*/
+/*}*/
+
+/*.layer a .layer_name {*/
+/*    color: white;*/
+/*    width: 100%;*/
+/*    background-color: rgb(51, 85, 136);*/
+/*    padding: .3rem .5rem;*/
+/*}*/
+
+/*.layer a .para {*/
+/*    color: black;*/
+/*    background-color: #fff;*/
+/*    padding: 0 .5rem;*/
+/*}*/
+
+.content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.breadcrumb {
+    flex-grow: 0;
+}
+
+.create-model {
+    display: flex;
+    flex-direction: row;
+    justify-items: stretch;
+    flex: 1;
+    height: 90%;
+}
+
+.model-select {
+    flex: 2;
+    background-color: white;
+    max-width: 20rem;
+    min-width: 13rem;
+    overflow: hidden;
+    height: 100%;
+}
+
+.model-select:hover {
+    overflow-y: auto;
+}
+
+.layer-cate {
+    background-color: white;
+    text-align: left;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    font-size: 1.25rem;
+    padding: 0 1rem;
+}
+
+.layer-cate i {
+    float: right;
+}
+
+.layer {
+    text-align: left;
+    background-color: #FFFAFAFA;
+    height: 2rem;
+    line-height: 2rem;
+    font-size: 1.125rem;
+    padding-left: 3rem;
+}
+
+.model-build {
+    flex: 6;
+    height: 100%;
+    background-color: transparent;
+}
+
+.model-para {
+    display: flex;
+    flex: 2;
+    height: 100%;
+    max-width: 20rem;
+    min-width: 13rem;
+    background-color: #2b8e6e;
+}

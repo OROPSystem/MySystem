@@ -1,0 +1,13 @@
+/user_data/test/datasets/image/*
+/user_data/test/datasets/tabular/*
+/user_data/test/models/*
+
+# ignore
+/user_data/test/models/PyTorch/
+/user_data/test/models/TensorFlow/
+/user_data/test/models/test/
+/user_data/test/models/*.pth
+
+/__pycache__/
+/.git/
+/.vscode/

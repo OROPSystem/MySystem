@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='models_storage/css/category.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='models_storage/css/model.css') }}">
+{% endblock %}
+
+{% block content %}
+    {{ super() }}
+    <div class="storage-container">
+        <div class="category-container">
+            <span>Tasks</span>
+            <div class="Libraries">
+                <button class="category">PyTorch</button>
+                <button class="category">Fill-Mask</button>
+                <button class="category">Fill-Mask</button>
+                <button class="category">Fill-Mask</button>
+                <button class="category">Fill-Mask</button>
+                <button class="category">Fill-Mask</button>
+                <button class="category">Fill-Mask</button>
+            </div>
+        </div>
+        <div class="models">
+            {#            TODO 使用jQuery or ajax get请求使用查询字符串实现选择#}
+            <div class="models-header">
+                <h3>Models</h3>
+                <label class="model-search">
+                    <input type="text" placeholder="Search Models">
+                </label>
+                <div class="sort-models">
+                    <button>Sort:Most Likes</button>
+                </div>
+            </div>
+            <div class="model-container"></div>
+        </div>
+
+        <div class="hazel"></div>
+        <div class="model-intro"></div>
+
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='models_storage/js/create_view.js') }}"></script>
+{% endblock %}

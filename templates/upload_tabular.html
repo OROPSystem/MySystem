@@ -1,0 +1,351 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block styles %}
+    {{ super() }}
+    <link href="{{ url_for('static', filename='base/css/tables.css') }}" rel="stylesheet">
+    <style>
+
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    {#    <div id="result"></div>#}
+    {#    {% with errors = get_flashed_messages(category_filter=["error"]) %}#}
+    {#        {% if errors %}#}
+    {#            {%- for msg in errors %}#}
+    {#                <div class="alert alert-danger alert-dismissible" role="alert">#}
+    {#                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">#}
+    {#                        <span aria-hidden="true">#}
+    {#                            ×#}
+    {#                        </span>#}
+    {#                    </button>#}
+    {#                    {{ msg }}#}
+    {#                </div>#}
+    {#            {% endfor -%}#}
+    {#        {% endif %}#}
+    {#    {% endwith %}#}
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">YOU ARE HERE</li>
+        <li class="breadcrumb-item"> Datasets</li>
+        <li class="breadcrumb-item active">Tabular</li>
+    </ol>
+    <div class="row">
+        <div class="col-lg-5">
+            <section class="widget min-height-300 widget-overflow">
+                <form action="{{ url_for('datasets.save_tabular') }}" id="upload_form" method="post"
+                      enctype="multipart/form-data">
+                    <header>
+                        <h6>
+                            Upload <span class="fw-semi-bold">Data</span>
+                        </h6>
+                    </header>
+                    <div class="margin-top-15">
+                        <label> <b>Train dataset in CSV format </b></label>
+                        <div class="custom-file mb-3">
+                            <input type="file" class="custom-file-input" name="train_file" id="train_file" required>
+                            <label id="train_file_label" for="train_file" class="custom-file-label">
+                                Choose file
+                            </label>
+                            <div style="width: 100%;text-align: center">
+                                <p class="text-danger mt-2 hidden" id="train_file_error"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="margin-top-15">
+
+                        <label> <b>Test dataset in CSV format (optional) </b></label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="test_file" id="test_file">
+                            <label id="test_file_label" for="test_file" class="custom-file-label"
+                                   title="TEST DATASET FILE: if not chosen, you can create the test set from the train set in the next step.">
+                                Choose file
+                            </label>
+                            <div style="width: 100%;text-align: center">
+                                <p class="text-danger mt-2 hidden" id="test_file_error"></p>
+                            </div>
+                        </div>
+                    </div>
+                    {#                    进度条#}
+                    <div class="progress mt-2 invisible" style="width: 100%">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                             aria-valuemax="100"></div>
+                    </div>
+
+                    <div style="width: 100%;text-align: center">
+                        <p class="text-danger mt-2 hidden" id="success_info"></p>
+                    </div>
+
+
+                    <div class="btn-next-parent">
+                        <button type="submit" class="btn btn-primary btn-next"
+                                id="upload_form_button" disabled>
+                            <span class="glyphicon glyphicon-save"></span>
+                            Save
+                        </button>
+                    </div>
+                    {#                    TODO 上传完成信息提示#}
+                    <h6 id="status_1"></h6>
+                    <h6 class="rem-08" id="loaded_n_total_1"></h6>
+                    <div id="status_1"></div>
+                </form>
+            </section>
+        </div>
+        <div class="col-lg-7" id="generate_div">
+            <section class="widget min-height-300 widget-overflow">
+                <header>
+                    <h6>
+                        Generate <span class="fw-semi-bold">Data</span>
+                    </h6>
+                </header>
+
+                <div class="margin-top-15">
+                    {#                    TODO 完成generate数据集#}
+                    <form action="{{ url_for('datasets.save_generate') }}" method="post" id="generate_form">
+                        <div class="form-group">
+                            <label for="dataset_name"><b>Dataset name</b></label>
+                            <input type="text" class="form-control" name="dataset_name" id="dataset_name">
+                        </div>
+                        <div class="form-group">
+                            <label for="select_option" class="control-label" title="">
+                                <b>Select an option to generate an example script</b>
+                            </label>
+                            <select class="form-control" id="select_option" name="select_option">
+                                <option>Regression</option>
+                                <option>Classifier - Cluster</option>
+                                <option>Classifier - Decision Tree</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="generate_script"><b>Script</b></label>
+                            <textarea class="form-control" id="generate_script" rows="2"
+                                      name="generate_script"></textarea>
+                            <small class="text-muted" id="script_help">
+                                You can expand this text area by dragging the bottom right corner.
+                            </small>
+                        </div>
+
+                        <div style="width: 100%;text-align: center">
+                            <p class="text-danger mt-2 hidden" id="generate_info"></p>
+                        </div>
+
+                        <div class="btn-next-parent">
+                            <small id="gen_error" class="text-danger">
+                            </small>
+                            <button type="submit" class="btn btn-primary btn-next" style="margin-top: 30px;"
+                                    id="generate_form_button" disabled>
+                                <span class="glyphicon glyphicon-save"></span>
+                                Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <section class="widget widget-overflow">
+                <header>
+                    <h6>
+                        Choose <span class="fw-semi-bold">Data</span>
+                    </h6>
+                </header>
+                <div class="table-responsive">
+                    <div class="navbar-form" role="search">
+                        <div class="form-group" style="margin-bottom: 10px;">
+                            <div class="input-group input-group-no-border">
+                                <input id="dataset_search" class="form-control" type="text"
+                                       placeholder="Search Dataset">
+                                <span class="input-group-append">
+                                    <span class="input-group-text">
+                                        <i class="la la-search"></i>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <table id="table_datasets" class="table table-hover table-striped "
+                           style="width:100%">
+
+                    </table>
+                </div>
+            </section>
+        </div>
+        <div class="col-lg-9">
+            <section class="widget widget-overflow">
+                <header>
+                    <h6>
+                        Raw <span class="fw-semi-bold">Data</span>
+                    </h6>
+                    <div class="widget-controls">
+                        <a data-widgster="expand" title="Expand" href="#"><i
+                                class="glyphicon glyphicon-chevron-up"></i></a>
+                        <a data-widgster="collapse" title="Collapse" href="#"><i
+                                class="glyphicon glyphicon-chevron-down"></i></a>
+                        <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
+                    </div>
+                </header>
+                <div class="widget-body">
+                    <div class="table-responsive visualization hide-element">
+                        <div class="navbar-form" role="search">
+                            <div class="form-group" style="margin-bottom: 10px;">
+                                <div class="input-group input-group-no-border">
+                                    <input id="raw_data_search" class="form-control" type="text"
+                                           placeholder="Search Value">
+                                    <span class="input-group-append">
+                                    <span class="input-group-text">
+                                        <i class="la la-search"></i>
+                                    </span>
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                        <table id="table_raw_data" class="table table-hover table-striped head-no-transform"
+                               style="width:100%">
+                        </table>
+                        <div id="overflow_dataset" class="clear-both-left font-12"></div>
+                    </div>
+
+                    <div class="loader hide-element">Loading...</div>
+                    <div class="waiting-selection">
+                        Click on a Dataset to display
+                    </div>
+
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4">
+            <section class="widget">
+                <header>
+                    <h6>
+                        Scatter <span class="fw-semi-bold">Plot</span>
+                    </h6>
+                    <div class="widget-controls">
+                        <a data-widgster="expand" title="Expand" href="#"><i
+                                class="glyphicon glyphicon-chevron-up"></i></a>
+                        <a data-widgster="collapse" title="Collapse" href="#"><i
+                                class="glyphicon glyphicon-chevron-down"></i></a>
+                        <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
+                    </div>
+                </header>
+                <div class="widget-body">
+                    <div id="scatter" class="visualization hide-element">
+                        <div id='scatter-content'></div>
+                        <div class="row">
+                            <div id='scatter-select-div1' class="col-6"></div>
+                            <div id='scatter-select-div2' class="col-6"></div>
+                        </div>
+
+                    </div>
+
+                    <div class="loader hide-element">Loading...</div>
+                    <div class="waiting-selection">
+                        Click on a Dataset to display
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="col-lg-4">
+            <section class="widget">
+                <header>
+                    <h6>
+                        Feature <span class="fw-semi-bold">Histogram</span>
+                    </h6>
+                    <div class="widget-controls">
+                        <a data-widgster="expand" title="Expand" href="#"><i
+                                class="glyphicon glyphicon-chevron-up"></i></a>
+                        <a data-widgster="collapse" title="Collapse" href="#"><i
+                                class="glyphicon glyphicon-chevron-down"></i></a>
+                        <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
+                    </div>
+                </header>
+                <div class="widget-body">
+                    <div class="visualization hide-element">
+                        <div id='hist-content'></div>
+                        <div id="hist-select" class="text-align-center"></div>
+                    </div>
+                    <div class="loader hide-element">Loading...</div>
+                    <div class="waiting-selection">
+                        Click on a Dataset to display
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="col-lg-4">
+            <section class="widget">
+                <header>
+                    <h6>
+                        Heat <span class="fw-semi-bold">Map</span>
+                    </h6>
+                    <div class="widget-controls">
+                        <a data-widgster="expand" title="Expand" href="#"><i
+                                class="glyphicon glyphicon-chevron-up"></i></a>
+                        <a data-widgster="collapse" title="Collapse" href="#"><i
+                                class="glyphicon glyphicon-chevron-down"></i></a>
+                        <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>
+                    </div>
+                </header>
+                <div class="widget-body">
+                    <div class="visualization hide-element" id="corr-mat">
+                    </div>
+                    <div class="loader hide-element">Loading...</div>
+                    <div class="waiting-selection">
+                        Click on a Dataset to display
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <button type="button" id="get_profile" class="btn btn-primary btn-next disabled-custom center-item"> Show report
+        </button>
+
+    </div>
+
+    <div id="profile_modal" class="modal" tabindex="-1" role="dialog">
+        <div id="profile_modal_dialog" class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Report</h5>
+                    <button type="button" id="close" class="close" data-dismiss="modal"
+                            aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body pre-scrollable" id="modal_body">
+                </div>
+
+            </div>
+            Luliezhi123
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block scripts %}
+    {{ super() }}
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/sl-1.2.5/datatables.min.js"></script>
+    <script src="{{ url_for('static', filename='datasets/upload_tabular.js') }}"></script>
+    <script src="{{ url_for('static', filename='datasets/generate.js') }}"></script>
+    {#    <script src="{{ url_for('static', filename='visualize_tabular.js') }}"></script>#}
+    {#    <script src="{{ url_for('static', filename='data_graphs.js') }}"></script>#}
+    {#    <script src="{{ url_for('static', filename='notify.js') }}"></script>#}
+    <script type=text/javascript>
+        const handle_key = {};
+        {#handle_key.datasets = {{  datasets | tojson | safe }};#}
+        {#handle_key.data_types = {{  data_types | tojson | safe }};#}
+        handle_key.examples = {{  examples | tojson | safe }};
+        window.appConfig = {
+            handle_key: handle_key
+        };
+    </script>
+    <script>
+
+    </script>
+{% endblock %}
+

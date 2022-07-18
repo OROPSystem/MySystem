@@ -1,0 +1,37 @@
+.storage-container {
+    display: flex;
+    width: 100%;
+}
+
+.category-container {
+    display: flex;
+    flex: 1;
+    min-width: 20rem;
+    max-width: 30rem;
+    background-color: #f9fafb;
+    flex-direction: column;
+}
+
+.category-container span {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+}
+
+
+.Tasks {
+    background-color: #f9fafb;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.category {
+    margin-bottom: 10px;
+    margin-right: 10px;
+    border: 0.1rem solid whitesmoke;
+    border-radius: 0.5rem;
+    background-color: white;
+    font-size: 1rem;
+    height: 2rem;
+    cursor: pointer;
+    line-height: 100%;
+}

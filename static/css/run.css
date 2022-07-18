@@ -1,0 +1,105 @@
+
+.button-play {
+    width: 72px;
+    height: 72px;
+    cursor: pointer;
+    display: block;
+}
+
+.l--page {
+    /*padding: 5px;*/
+    /*margin: 5px 0;*/
+    /*border: 1px solid #eee;*/
+    /*border-left-width: 0px;*/
+    /*border-radius: 6px;*/
+    /*border-bottom: 1px solid #ddd;*/
+    /*box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);*/
+    /*background: whitesmoke;*/
+    /*overflow-x: scroll;*/
+}
+
+.l--page .row {
+    margin: 0 !important;
+}
+
+#top-controls .timeline-controls {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+#top-controls .control {
+    flex-grow: 1;
+    max-width: 180px;
+    min-width: 110px;
+    margin-left: 30px;
+    margin-top: 6px;
+    /*margin-right: 80%;*/
+}
+
+#top-controls .control .label,
+#top-controls .control label {
+    color: #777;
+    font-size: 13px;
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 300;
+    text-align: left;
+}
+
+#top-controls .control .value {
+    font-size: 16px;
+    margin: 0;
+    font-weight: 300;
+}
+
+.top-row {
+    width: 100%;
+    overflow: hidden;
+}
+
+.fa-undo-alt {
+    font-size: 25px;
+    color: #d7d7d7;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.fa-undo-alt:hover {
+    color: #b0bed9;
+
+}
+
+.param-section {
+    width: 100%;
+    text-align: right;
+    border-bottom: 1px solid lightgray;
+    line-height: 0.1em;
+    margin: 10px 0 20px;
+    margin-top: 40px;
+    font-size: 12px;
+}
+
+.param-section span {
+    background: #fff;
+    padding-left: 10px;
+}
+
+.log-div {
+    /*max-height: 132px;*/
+    overflow-y: auto;
+}
+
+.log {
+    background-color: #fbfcff;
+    padding: 21px;
+    white-space: pre-wrap;
+    margin-top: 20px;
+
+    /*border: 2px solid;*/
+    /*width: 100%;*/
+    height: 132px;
+    resize: vertical;
+    overflow: auto;
+
+}

@@ -1,0 +1,127 @@
+.content {
+    height: 100%;
+}
+
+.storage-container {
+    height: 100%;
+    width: 100%;
+}
+
+.models {
+    display: flex;
+    flex: 2;
+    height: 100%;
+    background-color: white;
+    padding: 0 1.25rem;
+    flex-direction: column;
+}
+
+.models-header {
+    display: flex;
+    width: 100%;
+    font-size: 1.125rem;
+    justify-items: center;
+    margin: 1rem 0 2rem;
+}
+
+.model-search {
+    width: 30%;
+    margin-right: auto;
+    margin-left: 3rem;
+}
+
+.model-search input {
+    width: 100%;
+    border: 1px solid grey;
+    border-radius: 3rem;
+    text-indent: 1rem;
+    box-shadow: 0 0 0.5rem lightgrey inset;
+}
+
+.model-container {
+    display: grid;
+    gap: 1.25rem;
+}
+
+@media screen and (max-width: 1400px) {
+    .model-container {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    .model-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.model {
+    background-image: linear-gradient(to right, #f9fafb, white);
+    border-radius: .7rem;
+    padding: .5rem;
+    border: 2px solid whitesmoke;
+    box-shadow: 0 .1rem .3rem lightgrey;
+}
+
+.model:hover {
+    background-image: linear-gradient(to right, #f9fafb, whitesmoke);
+}
+
+.model a {
+    margin-bottom: .125rem;
+}
+
+.model a {
+    text-decoration: none;
+}
+
+.models-header {
+    display: flex;
+
+}
+
+.model-info {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.hazel {
+    z-index: 99;
+    position: absolute;
+    background-color: white;
+    width: 95%;
+    height: 90%;
+    filter: blur(1rem) opacity(80%);
+}
+
+.model-intro {
+    z-index: 999;
+    display: flex;
+    position: absolute;
+    top: 30%;
+    left: 20%;
+    width: 60%;
+    height: 50%;
+    background-color: #fff;
+    border: .1rem solid lightgrey;
+    border-radius: 3rem;
+    box-shadow: .5rem .5rem .5rem lightgrey;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.intro-header {
+    padding-left: 3rem;
+    padding-top: 1rem;
+    padding-bottom: .5rem;
+}
+
+.intro-header h3 {
+    border-bottom: .2rem solid #333;
+    display: inline-block;
+}
+
+.quote-model {
+    flex-grow: 0;
+}

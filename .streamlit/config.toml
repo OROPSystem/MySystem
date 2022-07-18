@@ -1,0 +1,11 @@
+[server]
+maxUploadSize = 10240
+runOnSave = true
+cookieSecret = "HUSTOROP"
+enableXsrfProtection = true
+
+[ui]
+hideTopBar = false
+
+[browser]
+serverAddress = "0.0.0.0"

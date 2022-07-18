@@ -1,0 +1,218 @@
+{% extends "base.html" %}
+{#{% import 'bootstrap/wtf.html' as wtf %}#}
+{#{% from '_render_field.html' import render_checkbox, render_option_field, render_field_two_col, render_single_field, render_field, render_gener_field %}#}
+{% block styles %}
+    {{ super() }}
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='train/css/train.css') }}">
+    {#    <link href="{{ url_for('static', filename='base/css/tables.css') }}" rel="stylesheet">#}
+    {#    <link href="{{ url_for('static', filename='css/gallery.css') }}" rel="stylesheet">#}
+{% endblock %}
+
+{% block content %}
+    {{ super() }}
+    <div class="iframe-container">
+        <iframe src="http://localhost:8502"></iframe>
+    </div>
+    {#    <ol class="breadcrumb">#}
+    {#        <li class="breadcrumb-item">YOU ARE HERE</li>#}
+    {#        <li class="breadcrumb-item"> Datasets</li>#}
+    {#        <li class="breadcrumb-item active">Image</li>#}
+    {#    </ol>#}
+    {#    <div class="row">#}
+    {#        <div class="col-lg-12">#}
+    {#            <section class="widget widget-overflow">#}
+    {#                <form action="{{ url_for('datasets.save_tabular') }}" id="upload_form" method="post"#}
+    {#                      enctype="multipart/form-data">#}
+    {#                    <header>#}
+    {#                        <h6>#}
+    {#                            Upload <span class="fw-semi-bold">Data</span>#}
+    {#                        </h6>#}
+    {#                    </header>#}
+    {#                    <div class="row">#}
+    {##}
+    {#                        <div class="col-lg-5">#}
+    {##}
+    {#                            <div class="margin-top-15">#}
+    {#                                <div class="form-group">#}
+    {#                                    <label for="select_option" class="control-label" title="">#}
+    {#                                        <b>Select format option</b>#}
+    {#                                    </label>#}
+    {#                                    <select class="form-control" id="select_option" name="select_option">#}
+    {#                                        <option>Folder per class</option>#}
+    {#                                        <option>All same folder with label file</option>#}
+    {#                                        <option>Numpy file</option>#}
+    {#                                    </select>#}
+    {#                                </div>#}
+    {#                            </div>#}
+    {#                            <div class="margin-top-15">#}
+    {#                                <label id="image_file_type"> <b>Image compression file </b></label>#}
+    {#                                <div class="custom-file">#}
+    {#                                    <input type="file" class="custom-file-input" name="image_file" id="image_file"#}
+    {#                                           accept="">#}
+    {#                                    <label id="image_file_label" for="image_file" class="custom-file-label">#}
+    {#                                        Choose file#}
+    {#                                    </label>#}
+    {#                                    <div style="width: 100%;text-align: center">#}
+    {#                                        <p class="text-danger mt-2 hidden" id="image_file_error"></p>#}
+    {#                                    </div>#}
+    {#                                </div>#}
+    {#                                <div class="progress mt-2 invisible" style="width: 100%">#}
+    {#                                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0"#}
+    {#                                         aria-valuemax="100"></div>#}
+    {#                                </div>#}
+    {#                                <div style="width: 100%;text-align: center">#}
+    {#                                    <p class="text-danger mt-2 hidden" id="image_file_error"></p>#}
+    {#                                </div>#}
+    {#                                <div style="width: 100%;text-align: center">#}
+    {#                                    <p class="text-danger mt-2 hidden" id="success_info"></p>#}
+    {#                                </div>#}
+    {#                            </div>#}
+    {#                        </div>#}
+    {#                        <div class="col-lg-7">#}
+    {#                            <div id="format" class="margin-top-15">#}
+    {#                                <label><b>Format selected</b></label>#}
+    {#                                <pre id='format-content' class="prettyprint"></pre>#}
+    {#                            </div>#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                    <div class="btn-next-parent">#}
+    {#                        <button type="submit" class="btn btn-primary btn-next"#}
+    {#                                id="upload_form_button" disabled>#}
+    {#                            <span class="glyphicon glyphicon-save"></span>#}
+    {#                            Save#}
+    {#                        </button>#}
+    {#                    </div>#}
+    {#                </form>#}
+    {#            </section>#}
+    {#        </div>#}
+    {#    </div>#}
+    {##}
+    {##}
+    {##}
+    {##}
+    {#    <div class="row">#}
+    {#        <div class="col-lg-3">#}
+    {#            <section class="widget widget-overflow">#}
+    {#                <header>#}
+    {#                    <h6>#}
+    {#                        Choose <span class="fw-semi-bold">Data</span>#}
+    {#                    </h6>#}
+    {#                </header>#}
+    {#                <div class="table-responsive">#}
+    {#                    <div class="navbar-form" role="search">#}
+    {#                        <div class="form-group" style="margin-bottom: 10px;">#}
+    {#                            <div class="input-group input-group-no-border">#}
+    {#                                <input id="dataset_search" class="form-control" type="text"#}
+    {#                                       placeholder="Search Dataset">#}
+    {#                                <span class="input-group-append">#}
+    {#                                        <span class="input-group-text">#}
+    {#                                            <i class="la la-search"></i>#}
+    {#                                        </span>#}
+    {#                                    </span>#}
+    {#                            </div>#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                    <table id="table_datasets" class="table table-hover table-striped "#}
+    {#                           style="width:100%">#}
+    {##}
+    {#                    </table>#}
+    {#                </div>#}
+    {#            </section>#}
+    {#        </div>#}
+    {#        <div class="col-lg-5">#}
+    {#            <section class="widget widget-overflow">#}
+    {#                <header>#}
+    {#                    <h6>#}
+    {#                        Sample <span class="fw-semi-bold">Images</span>#}
+    {#                    </h6>#}
+    {#                    <div class="widget-controls">#}
+    {#                        <a data-widgster="expand" title="Expand" href="#"><i#}
+    {#                                class="glyphicon glyphicon-chevron-up"></i></a>#}
+    {#                        <a data-widgster="collapse" title="Collapse" href="#"><i#}
+    {#                                class="glyphicon glyphicon-chevron-down"></i></a>#}
+    {#                        <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>#}
+    {#                    </div>#}
+    {#                </header>#}
+    {#                <div class="widget-body">#}
+    {#                    <div class="visualization row margin-top-15 align-items-center gallery-container hide-element">#}
+    {#                        <div class="col-9 padding-small" id="gallery">#}
+    {#                            <div class="widget img-container" id="img-container">#}
+    {#                                <img class="gallery-img" id="expandedImg">#}
+    {#                                <a href="#" id="previous" class="arrow-prev">&lt;</a>#}
+    {#                                <a href="#" id="next" class="arrow-next">&gt;</a>#}
+    {#                                <label id="imgText"></label>#}
+    {#                            </div>#}
+    {##}
+    {#                        </div>#}
+    {#                        <div class="col-3 padding-small">#}
+    {#                            <div class="gallery-sidebar" id="img-sidebar">#}
+    {##}
+    {#                            </div>#}
+    {##}
+    {#                        </div>#}
+    {##}
+    {#                    </div>#}
+    {#                    <div class="loader hide-element">Loading...</div>#}
+    {#                    <div class="waiting-selection">#}
+    {#                        Click on a Dataset to display#}
+    {#                    </div>#}
+    {##}
+    {#                </div>#}
+    {##}
+    {#            </section>#}
+    {#        </div>#}
+    {#        <div class="col-lg-4">#}
+    {#            <section class="widget">#}
+    {#                <header>#}
+    {#                    <h6>#}
+    {#                        Label <span class="fw-semi-bold">Distribution</span>#}
+    {#                    </h6>#}
+    {#                    <div class="widget-controls">#}
+    {#                        <a data-widgster="expand" title="Expand" href="#"><i#}
+    {#                                class="glyphicon glyphicon-chevron-up"></i></a>#}
+    {#                        <a data-widgster="collapse" title="Collapse" href="#"><i#}
+    {#                                class="glyphicon glyphicon-chevron-down"></i></a>#}
+    {#                        <a href="#" data-widgster="close"><i class="glyphicon glyphicon-remove"></i></a>#}
+    {#                    </div>#}
+    {#                </header>#}
+    {#                <div class="widget-body">#}
+    {#                    <div class="visualization hide-element" id="label-dist">#}
+    {#                    </div>#}
+    {#                    <div class="loader hide-element">Loading...</div>#}
+    {#                    <div class="waiting-selection">#}
+    {#                        Click on a Dataset to display#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#            </section>#}
+    {#        </div>#}
+    {#    </div>#}
+{% endblock %}
+
+
+{% block scripts %}
+    {{ super() }}
+    {#    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>#}
+    {#    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/sl-1.2.5/datatables.min.js"></script>#}
+    {#    <script src="{{ url_for('static', filename='notify.js') }}"></script>#}
+    {#    <script src="{{ url_for('static', filename='datasets/upload_image.js') }}"></script>#}
+    {#    <script src="{{ url_for('static', filename='visualize_image.js') }}"></script>#}
+    {#    <script src="{{ url_for('static', filename='data_graphs.js') }}"></script>#}
+    {##}
+    {#    <script type=text/javascript>#}
+    {#        $(document).ready(function () {#}
+    {#            $('#sb-datasets').addClass('active');#}
+    {#            $('#upload_image').addClass('active');#}
+    {#            $('#sidebar-data').addClass('show');#}
+    {#        });#}
+    {#    </script>#}
+
+    {#    <script type=text/javascript>#}
+    {#        var handle_key = {};#}
+    {#        handle_key.datasets = {{  data_types | tojson | safe }};#}
+    {#        window.appConfig = {#}
+    {#            handle_key: handle_key#}
+    {#        };#}
+    {#    </script>#}
+{% endblock %}
+
