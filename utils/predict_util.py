@@ -35,6 +35,7 @@ class PredictDataset:
         # parse transform from saved model with timm
         config = resolve_data_config(self.default_cfg, model=self.model)
         transform = create_transform(**config)
+        print(transform)
         return transform
 
     def create_dataloader_iterator(self, mode, batch_size, trans=None, shuffle=True, drop_last=False):
@@ -105,6 +106,7 @@ class Predicter(ClassifyPredicter):
         progress_bar = st.progress(0)
         st.write(f"Testing on {self.device}")
         self.model.to(self.device)
+        self.model.eval()
 
         # metric
         predict_loss, correct = 0, 0
@@ -116,6 +118,10 @@ class Predicter(ClassifyPredicter):
             for inputs, targets in self.predict_iter:
                 inputs, targets = inputs.to(self.device), targets.to(self.device)
                 pred = self.model(inputs)
+
+                # Adapt Lizhaofu model
+                if isinstance(pred, tuple):
+                    pred = pred[1] # (feature, logit) -> logit
 
                 predict_loss += self.loss_fn(pred, targets).item()
                 correct      += (pred.argmax(1) == targets).type(torch.float).sum().item()
