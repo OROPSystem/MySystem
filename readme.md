@@ -5,7 +5,7 @@
 1. 命名的唯一性，不能与系统中其他数据集同名
 2. 主文件夹下包含用于训练和测试的数据：统一命名为**train_origin**和**test**
 3. 训练和测试数据集下包含数据集的每个类别文件夹
-4. 将图片以**jpg/png**格式放置在对应的分类文件夹下，对图片命名无要求
+4. 将图片以**jpg/png/bmp**格式放置在对应的分类文件夹下，对图片命名无要求，中英文均可
 5. 提交压缩包（上限10GB），例如*NEU.zip*，确保解压之后路径结构如下：
 
 **NEU**
@@ -65,6 +65,24 @@
     }, net_path)
     ```
 
+  - 如果您采用保存模型参数（OrderedDict）的方式，请提供一个`net.py`文件，文件应该包含如下内容：
+
+    ```python
+    # 以ResNet为例
+    class ResNets(nn.Module):
+        def __init__(self, model_name='resnet18', num_layers=12, num_classes=5, feature_extract=False, use_pretrained=True):
+            super(ResNets, self).__init__()
+    				# 创建模型代码
+    
+        def forward(self, x):
+    				# 前向传播代码
+            return result
+    
+    # 如果前向传播输出的不只是预测的logit, 请说明输出的格式.
+    # 例如 [feature, logit] <type `tuple`>
+    ```
+
 以上均通过测试，如有问题随时沟通。
 
 优先提供预训练模型。说明预训练模型库，自定义模型类，自己测试达到的精度。
+

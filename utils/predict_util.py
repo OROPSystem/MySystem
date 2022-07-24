@@ -1,11 +1,18 @@
+from tkinter import image_names
+from tkinter.messagebox import NO
+from matplotlib.pyplot import title
 import streamlit as st
 import numpy as np
 import torch
 import torch.nn as nn
 from torchvision import datasets
 from torch.utils.data import DataLoader
+from sklearn.metrics import precision_score, recall_score
 import pandas as pd
 import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+from PIL import Image
+import random
 import time
 
 # 沿用train_app.py 117-123
@@ -50,6 +57,8 @@ class ClassifyPredicter:
         self.dataset_name = dataset_name
         self.predict_dataset = predict_dataset
         self.predict_labels = []
+        self.true_labels = []
+        self.confidence = []
 
     def predict(self, *args):
         """预测标签值并存入predict_labels.
@@ -66,12 +75,12 @@ class ClassifyPredicter:
 
     def show_images(self):
         # privacy handle
-        images = [item[0] for item in self.predict_dataset.imgs]
-        st.sidebar.selectbox(label="Choose one image", options=images)
+        self.__images = [item[0] for item in self.predict_dataset.imgs]
+        st.sidebar.selectbox(label="Choose one image", options=self.__images)
         labels = [item[1] for item in self.predict_dataset.imgs]
-        privacy_images = [self.dataset_name + i.split(self.dataset_name)[1] for i in images]
-        df_data = list(zip(privacy_images, labels, self.predict_labels))
-        df = pd.DataFrame(data=df_data, columns=["image source", "labels", "predictions"])
+        privacy_images = [self.dataset_name + i.split(self.dataset_name)[1] for i in self.__images]
+        df_data = list(zip(privacy_images, labels, self.predict_labels, self.confidence))
+        df = pd.DataFrame(data=df_data, columns=["image source", "labels", "predictions", "confidence"])
 
         # show the different prediction
         # st.text([v for v in df["labels"]==df["predictions"]])
@@ -90,6 +99,51 @@ class ClassifyPredicter:
         fig.add_traces([trace1, trace2])
         layout = go.Layout(title="真实标签与预测标签统计图")
         st.plotly_chart(fig, layout=layout)
+
+    def show_confidence(self):
+        # plotly出图，能设置行列，但是图间隔较大，显示小，标题显示有问题
+
+        # fig = make_subplots(rows=3, cols=3, horizontal_spacing=0, vertical_spacing=0, subplot_titles=self.confidence[:9])
+        # # fig = go.Figure()
+        # for i in range(9):
+        #     img = Image.open(self.__images[i], mode="r")
+        #     img_array = np.array(img)
+        #     if img.mode == "L":
+        #         img_array = np.stack([img_array, img_array, img_array], axis=-1)
+        #     img_trace = go.Image(z=img_array, colormodel="rgb")
+        #     fig.add_trace(img_trace, row=i//3+1, col=i%3+1)
+        # layout = go.Layout(title="置信度")
+        # fig.update_layout(coloraxis_showscale=False)
+        # fig.update_xaxes(showticklabels=False)
+        # fig.update_yaxes(showticklabels=False)
+        # st.plotly_chart(fig, layout=layout)
+
+        # streamlit出图，只能设置列数，行数只能是一行
+        def create_confidence():
+            col1, col2, col3 = st.columns(3)
+            index = random.sample(list(range(0, len(self.predict_labels))), 3)
+            idx = [self.predict_labels[i] for i in index]
+            with col1:
+                with st.container():
+                    st.text(f"Predict: {self.idx2cls[idx[0]]}")
+                    img = Image.open(self.__images[index[0]], mode="r")
+                    img_array = np.array(img)
+                    st.image(img_array, caption=f"Confidence: {self.confidence[index[0]]:.2f}", use_column_width="always")
+            with col2:
+                with st.container():
+                    st.text(f"Predict: {self.idx2cls[idx[1]]}")
+                    img = Image.open(self.__images[index[1]], mode="r")
+                    img_array = np.array(img)
+                    st.image(img_array, caption=f"Confidence: {self.confidence[index[1]]:.2f}", use_column_width="always")
+            with col3:
+                with st.container():
+                    st.text(f"Predict: {self.idx2cls[idx[2]]}")
+                    img = Image.open(self.__images[index[2]], mode="r")
+                    img_array = np.array(img)
+                    st.image(img_array, caption=f"Confidence: {self.confidence[index[2]]:.2f}", use_column_width="always")
+        create_confidence()
+        create_confidence()
+        create_confidence()
 
 
 class Predicter(ClassifyPredicter):
@@ -127,11 +181,20 @@ class Predicter(ClassifyPredicter):
                 correct      += (pred.argmax(1) == targets).type(torch.float).sum().item()
                 # st.text(f"{pred.argmax(1)}, {targets}")
                 self.predict_labels.extend(pred.argmax(1).tolist())
+                # add true labels and confidence
+                self.confidence.extend(torch.max(nn.Softmax(dim=1)(pred), dim=1)[0].tolist())
+                self.true_labels.extend(targets.tolist())
                 self.count   += 1
                 progress_bar.progress(self.count / (num_batches))
         predict_loss /= num_batches
+
+        # Metrics
         correct /= size
-        st.text(f"Test Error: \n Accuracy: {(100*correct):>0.1f}%, Avg loss: {predict_loss:>8f} \n")
+        precision = precision_score(self.true_labels, self.predict_labels, average='macro')
+        recall = recall_score(self.true_labels, self.predict_labels, average='macro')
+
+        st.subheader("Test Metrics:")
+        st.text("Accuracy: {:.2%} \nAvg Loss: {:.4f} \n漏检率: {:.2%} \n误检率: {:.2%}".format(correct, predict_loss, 1-recall, 1-precision))
 
         # lables
         st.subheader("Labels")
@@ -140,3 +203,5 @@ class Predicter(ClassifyPredicter):
         # Visualization
         st.subheader("Visualization")
         self.show_images()
+        # Confidence
+        self.show_confidence()
