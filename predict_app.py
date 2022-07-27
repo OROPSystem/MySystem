@@ -1,19 +1,11 @@
 from typing import OrderedDict
-from utils.net import ResNets, VITs
+from utils.networks import *
 import torch
 import streamlit as st
 import pathlib
 import collections
 import torchinfo
 import torchvision
-
-
-# # 获取Library相应的model名
-# models_path = pathlib.Path("")
-
-# option = st.sidebar.selectbox(label="Model",
-#                               options=["VGG", "resnet18"])
-# view_structure = st.sidebar.checkbox(label="View Structure", value=False)
 
 
 def get_streamlit_params():
@@ -90,12 +82,18 @@ def predict_pytorch(params, predict_button):
         default_cfg = {}
     # Adapt Lizhaofu model
     elif isinstance(checkpoint, OrderedDict):
-        if "resnet18" in model:
-            model = ResNets(model_name='resnet18')
-        elif "resnet50" in model:
-            model = ResNets(model_name='resnet50')
-        elif "vit" in model:
-            model = VITs()
+        # if "resnet18" in model and 'pcb' in model:
+        #     model = ResNets(model_name='resnet18')
+        # elif "resnet50" in model and 'pcb' in model:
+        #     model = ResNets(model_name='resnet50')
+        # elif "vit" in model and 'pcb' in model:
+        #     model = VITs()
+        # elif "resnet50_eca_wm811k" in model:
+        #     model = eca_resnet50()
+        # elif "resnet50_simam_wm811k" in model:
+        #     model = sim_resnet50()
+        model_name = '_'.join(model.split('_')[:-1])
+        model = ModelRegistry[model_name]()
         model.load_state_dict(checkpoint)
         model = model.to(device)
         default_cfg = {}
