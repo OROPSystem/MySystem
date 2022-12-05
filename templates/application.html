@@ -1,0 +1,66 @@
+{% extends "base.html" %} {% block styles %} {{ super() }}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='train/css/train.css') }}"
+/>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/predict_combine.css') }}"
+/>
+{% endblock %} {% block content %} {{ super() }}
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">YOU ARE HERE</li>
+  <li class="breadcrumb-item active">Application</li>
+</ol>
+
+<div class="iframe-container">
+  <div>
+    <div class="container_combine">
+      <div class="card_combine">
+        <div class="content_combine">
+          <h2>缺陷分类</h2>
+          <p></p>
+          <input class="btn" type="button" value="查看更多" onclick="cls()" />
+        </div>
+      </div>
+      <div class="card_combine">
+        <div class="content_combine">
+          <h2>缺陷分割</h2>
+          <p></p>
+          <input class="btn" type="button" value="查看更多" onclick="seg()" />
+        </div>
+      </div>
+      <div class="card_combine">
+        <div class="content_combine">
+          <h2>缺陷检测</h2>
+          <p></p>
+          <input class="btn" type="button" value="查看更多" onclick="det()" />
+        </div>
+      </div>
+      <div class="card_combine">
+        <div class="content_combine">
+          <h2>故障诊断</h2>
+          <p></p>
+          <input class="btn" type="button" value="查看更多" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function cls() {
+    window.location.href = "{{url_for('dashboard.dashboard_cls')}}";
+  }
+
+  function seg() {
+    window.location.href = "{{url_for('dashboard.dashboard_seg')}}";
+  }
+
+  function det() {
+    window.location.href = "{{url_for('dashboard.dashboard_det')}}";
+  }
+</script>
+
+{% endblock %} {% block scripts %} {{ super() }} {% endblock %}

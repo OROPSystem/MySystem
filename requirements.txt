@@ -33,3 +33,11 @@ torchvision==0.12.0
 traitlets==5.3.0
 Werkzeug==2.1.2
 WTForms==3.0.1
+mmcv-full==1.5.1
+# mmdet3.0
+# pip install openmim
+# mim install mmengine
+# mim install "mmdet>=3.0.0rc0"
+# segmentation-models-pytorch 
+git+https://github.com/qubvel/segmentation_models.pytorch
+albumentations

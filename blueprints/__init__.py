@@ -7,3 +7,5 @@ from .predict import bp as predict_bp
 from .test import bp as test_bp
 from .deployment import bp as deployment_bp
 from .models_storage import bp as models_storage_bp
+from .application import bp as application_bp
+from .models import bp as models_bp

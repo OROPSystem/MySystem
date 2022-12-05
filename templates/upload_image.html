@@ -9,10 +9,20 @@
     {#    <link href="{{ url_for('static', filename='css/gallery.css') }}" rel="stylesheet">#}
 {% endblock %}
 
+
+
 {% block content %}
+
     {{ super() }}
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">YOU ARE HERE</li>
+        <li class="breadcrumb-item"> Datasets</li>
+        <li class="breadcrumb-item active">Image</li>
+    </ol>
+
     <div class="iframe-container">
-        <iframe src="http://localhost:8502"></iframe>
+        <iframe src="http://localhost:8500"></iframe>
     </div>
     {#    <ol class="breadcrumb">#}
     {#        <li class="breadcrumb-item">YOU ARE HERE</li>#}

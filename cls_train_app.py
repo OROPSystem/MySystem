@@ -79,6 +79,7 @@ def get_streamlit_params():
     return params
 
 
+
 def train_pytorch(params, train_button, stop_button):
     # ------------------------
     # Title

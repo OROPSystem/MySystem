@@ -57,7 +57,7 @@ def predict_pytorch(params, predict_button):
     # Title
     # ------------------------
     user_name = "test"
-    st.title("Predict")
+    st.title("Defect Classification")
 
     # ------------------------
     # get params config

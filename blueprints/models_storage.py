@@ -17,10 +17,17 @@ import shutil
 bp = Blueprint(name="models_storage", import_name=__name__, url_prefix="/models_storage")
 
 
-@bp.route("/")
-def models_storage():
-    return render_template("models_storage.html")
+@bp.route("/cls")
+def models_storage_cls():
+    return render_template("templates_cls/models_storage.html")
 
+@bp.route("/seg")
+def models_storage_seg():
+    return render_template("templates_seg/models_storage.html")
+
+@bp.route("/det")
+def models_storage_det():
+    return render_template("templates_det/models_storage.html")
 
 @bp.route("/quote_model", methods=["POST"])
 def quote_model():

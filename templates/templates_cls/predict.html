@@ -1,0 +1,16 @@
+{% extends "templates_cls/base.html" %} {% block styles %} {{ super() }}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='train/css/train.css') }}"
+/>
+{% endblock %} {% block content %} {{ super() }}
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">YOU ARE HERE</li>
+  <li class="breadcrumb-item active">Predict</li>
+</ol>
+
+<div class="iframe-container">
+  <iframe src="http://localhost:8502"></iframe>
+</div>
+{% endblock %} {% block scripts %} {{ super() }} {% endblock %}

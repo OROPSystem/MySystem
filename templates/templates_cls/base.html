@@ -74,66 +74,106 @@
           <!-- #notifications-dropdown-menu goes here when screen collapsed to xs or sm -->
         </div>
 
-        <!-- main notification links are placed inside .sidebar-nav -->
-        <!--
-        <ul class="sidebar-nav">
-          <li class="" id="sb-dashboard">
-            an example of nested submenu. basic bootstrap collapse component
-            <a href="{{ url_for('dashboard.dashboard') }}">
-              <span class="icon">
-                <i class="fi flaticon-home"></i>
-              </span>
-              Dashboard
-            </a>
-          </li>
-        </ul>-->
         <!-- every .sidebar-nav may have a title -->
         <!-- <h5 class="sidebar-nav-title">Template <a class="action-link" href="#"><i class="glyphicon glyphicon-refresh"></i></a></h5> -->
         <ul class="sidebar-nav">
-          <li class="" id="sb-dashboard">
+          <li class="" id="sb-gui_editor">
             <!-- an example of nested submenu. basic bootstrap collapse component -->
-            <a href="{{ url_for('dashboard.dashboard') }}">
+            <a href="{{ url_for('dashboard.dashboard_cls') }}">
               <span class="icon">
                 <i class="fi flaticon-home"></i>
+                <!--图标样式-->
               </span>
               Dashboard
             </a>
           </li>
 
-          <li class="" id="sb-datasets">
+          <li class="" id="sb-gui_editor">
             <!-- an example of nested submenu. basic bootstrap collapse component -->
+            <a href="{{ url_for('models.models_cls') }}">
+              <span class="icon">
+                <i class="fi flaticon-network"></i>
+              </span>
+              Models
+            </a>
+          </li>
 
+          <li class="" id="sb-model-storage">
+            <!-- an example of nested submenu. basic bootstrap collapse component -->
+            <a href="{{ url_for('models_storage.models_storage_cls') }}">
+              <span class="icon">
+                <i class="fi flaticon-database-3"></i>
+              </span>
+              ModelsStorage
+            </a>
+          </li>
+
+          <li class="" id="sb-train">
+            <!-- an example of nested submenu. basic bootstrap collapse component -->
+            <a href="{{ url_for('train_orgin.run_cls') }}">
+              <span class="icon">
+                <i class="fi flaticon-settings-train"></i>
+              </span>
+              Train
+            </a>
+          </li>
+
+          <li class="" id="sb-predict">
+            <!-- an example of nested submenu. basic bootstrap collapse component -->
+            <a href="{{ url_for('predict.predict_cls') }}">
+              <span class="icon">
+                <i class="fi flaticon-prediction"></i>
+              </span>
+              Predict
+            </a>
+          </li>
+
+          <!--
+          <li class="" id="sb-train">
             <a
               class="collapsed"
-              href="#sidebar-data"
+              href="#sidebar-train"
               data-toggle="collapse"
               data-parent="#sidebar"
             >
               <span class="icon">
-                <i class="fi flaticon-database-3"></i>
+                <i class="fi flaticon-settings-train"></i>
               </span>
-              Datasets
+              Train
               <i class="toggle fa fa-angle-down"></i>
             </a>
-            <ul id="sidebar-data" class="collapse">
-              <li id="upload_tabular" class="">
-                <a href="{{ url_for('datasets.tabular') }}">Tabular</a>
+            <ul id="sidebar-train" class="collapse">
+              <li id="li_run" class="">
+                <a href="{{ url_for('train_orgin.run_cls') }}">Run</a>
               </li>
-              <li id="upload_image" class="">
-                <a href="{{ url_for('datasets.image') }}">Image</a>
+              <li id="li_tb" class="">
+                <a href="{{ url_for('train_orgin.tensorboard_cls') }}"
+                  >Tensorboard</a
+                >
               </li>
             </ul>
-          </li>
+          </li>-->
 
-          <li id="sb-application">
-            <!-- an example of nested submenu. basic bootstrap collapse component -->
-            <a href="{{ url_for('application.application') }}">
+          <!--
+          <li id="sb-test">
+            an example of nested submenu. basic bootstrap collapse component
+            <a href="{{ url_for('test.test') }}">
               <span class="icon">
-                <i class="fi flaticon-prediction"></i>
+                <i class="fi flaticon-exam"></i>
               </span>
-              Application
+              Test
             </a>
           </li>
+
+          <li id="sb-deploy">
+            n example of nested submenu. basic bootstrap collapse component
+            <a href="{{ url_for('deployment.deployment') }}">
+              <span class="icon">
+                <i class="fi flaticon-cloud-computing"></i>
+              </span>
+              Deployment
+            </a>
+          </li> -->
         </ul>
       </div>
     </nav>

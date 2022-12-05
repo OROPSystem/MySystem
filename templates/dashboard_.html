@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/predict_combine.css') }}"
+    />
+
+    <link
+      href="{{ url_for('static', filename='base/css/application.css') }}"
+      rel="stylesheet"
+    />
+    <link
+      href="{{ url_for('static', filename='base/css/tables.css') }}"
+      rel="stylesheet"
+    />
+    <link
+      href="{{ url_for('static', filename='base/fonts/flaticon-2/flaticon.css') }}"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='base/img/logotext-brain.png') }}"
+    />
+
+    <style>
+      h5 {
+        color: darkblue;
+      }
+
+      p {
+        text-align: justify;
+      }
+    </style>
+  </head>
+
+  <body>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">YOU ARE HERE</li>
+      <li class="breadcrumb-item active">Home</li>
+    </ol>
+    <div class="row">
+      <div class="col-lg-5">
+        <section class="widget min-height-300 widget-overflow">
+          <header>
+            <h5>
+              <b> <span class="fw-semi-bold">团队简介</span></b>
+            </h5>
+          </header>
+          <div>
+            <p id="teamIntroInfo">
+              <br />
+            </p>
+          </div>
+          <br />
+          <header>
+            <h5>
+              <b> <span class="fw-semi-bold">系统简介</span></b>
+            </h5>
+          </header>
+          <div>
+            <p>
+              <br />
+              &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+              表面缺陷智能识别系统主要包括了：数据导入，数据增强，模型搭建，模型载入，模型保存，结果可视化等模块。
+              整个缺陷识别系统包括了缺陷识别的数据库和算法模型库，缺陷识别模型以卷积神经网络为主，可以实现导入以后模型，也可以利用拖拽模块进行搭建。
+              当前为1.0
+              beta版本，主要适用于表面缺陷的分类问题，后续还会针对表面缺陷的检测，定位等任务继续开发。
+            </p>
+          </div>
+        </section>
+      </div>
+      <div class="col-lg-7" id="generate_div">
+        <section class="widget min-height-300 widget-overflow">
+          <header>
+            <h5>
+              <b>缺陷识别系统已有模型</b>
+            </h5>
+          </header>
+          <br />
+          <ul>
+            <li><b>VGG16</b></li>
+            <li><b>DenseNet</b></li>
+            <li><b>Residual Network</b></li>
+          </ul>
+          <p>
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            <!-- 空格-->
+            Some models have same structure.
+          </p>
+          <header>
+            <h5>
+              <b>缺陷识别系统数据集</b>
+            </h5>
+          </header>
+          <br />
+          <ul>
+            <b>
+              <li>Iris</li>
+              <li>NEU-CLS</li>
+            </b>
+          </ul>
+          <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp NEU surface defect database</p>
+          <header>
+            <h5>
+              <b>缺陷识别系统开发人员</b>
+            </h5>
+          </header>
+          <br />
+          <p>
+            <b>
+              &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp {# 李新宇&nbsp&nbsp&nbsp#} {#
+              彭旭东&nbsp&nbsp&nbsp#} {# 肖畅奇&nbsp&nbsp&nbsp#} {# 高艺平#}
+            </b>
+          </p>
+        </section>
+      </div>
+    </div>
+
+    <div class="container_combine">
+      <div class="card_combine">
+        <div class="content_combine">
+          <h2>缺陷分类</h2>
+          <p></p>
+          <p></p>
+          <p></p>
+          <input class="btn" type="button" value="查看更多" onclick="cls()"/>
+        </div>
+      </div>
+      <div class="card_combine">
+        <div class="content_combine">
+          <h2>缺陷检测</h2>
+          <p></p>
+          <p></p>
+          <p></p>
+          <input class="btn" type="button" value="查看更多" />
+        </div>
+      </div>
+      <div class="card_combine">
+        <div class="content_combine">
+          <h2>故障诊断</h2>
+          <p></p>
+          <p></p>
+          <p></p>
+          <input class="btn" type="button" value="查看更多" />
+        </div>
+      </div>
+      <div class="card_combine">
+        <div class="content_combine">
+          <h2>缺陷分割</h2>
+          <p></p>
+          <p></p>
+          <p></p>
+          <input class="btn" type="button" value="查看更多" />
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    function cls(){
+      window.location.href = "{{url_for('dashboard.dashboard_cls')}}";
+    }
+  </script>
+</html>

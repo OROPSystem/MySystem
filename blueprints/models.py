@@ -12,11 +12,10 @@ from utils import create_pytorch_model
 
 bp = Blueprint(name="models", import_name=__name__, url_prefix="/models")
 
-
-@bp.route("/", methods=["GET", "POST"])
+@bp.route("/cls", methods=["GET", "POST"])
 @login_required
-def models():
-    return render_template("model.html")
+def models_cls():
+    return render_template("templates_cls/model.html")
 
 
 @bp.route("/save_model", methods=["POST"])

@@ -74,64 +74,37 @@
           <!-- #notifications-dropdown-menu goes here when screen collapsed to xs or sm -->
         </div>
 
-        <!-- main notification links are placed inside .sidebar-nav -->
-        <!--
-        <ul class="sidebar-nav">
-          <li class="" id="sb-dashboard">
-            an example of nested submenu. basic bootstrap collapse component
-            <a href="{{ url_for('dashboard.dashboard') }}">
-              <span class="icon">
-                <i class="fi flaticon-home"></i>
-              </span>
-              Dashboard
-            </a>
-          </li>
-        </ul>-->
         <!-- every .sidebar-nav may have a title -->
         <!-- <h5 class="sidebar-nav-title">Template <a class="action-link" href="#"><i class="glyphicon glyphicon-refresh"></i></a></h5> -->
         <ul class="sidebar-nav">
-          <li class="" id="sb-dashboard">
+          <li class="" id="sb-gui_editor">
             <!-- an example of nested submenu. basic bootstrap collapse component -->
-            <a href="{{ url_for('dashboard.dashboard') }}">
+            <a href="{{ url_for('dashboard.dashboard_det') }}">
               <span class="icon">
                 <i class="fi flaticon-home"></i>
+                <!--图标样式-->
               </span>
               Dashboard
             </a>
           </li>
 
-          <li class="" id="sb-datasets">
+          <li class="" id="sb-model-storage">
             <!-- an example of nested submenu. basic bootstrap collapse component -->
-
-            <a
-              class="collapsed"
-              href="#sidebar-data"
-              data-toggle="collapse"
-              data-parent="#sidebar"
-            >
+            <a href="{{ url_for('models_storage.models_storage_det') }}">
               <span class="icon">
                 <i class="fi flaticon-database-3"></i>
               </span>
-              Datasets
-              <i class="toggle fa fa-angle-down"></i>
+              ModelsStorage
             </a>
-            <ul id="sidebar-data" class="collapse">
-              <li id="upload_tabular" class="">
-                <a href="{{ url_for('datasets.tabular') }}">Tabular</a>
-              </li>
-              <li id="upload_image" class="">
-                <a href="{{ url_for('datasets.image') }}">Image</a>
-              </li>
-            </ul>
           </li>
 
-          <li id="sb-application">
+          <li class="" id="sb-predict">
             <!-- an example of nested submenu. basic bootstrap collapse component -->
-            <a href="{{ url_for('application.application') }}">
+            <a href="{{ url_for('predict.predict_det') }}">
               <span class="icon">
                 <i class="fi flaticon-prediction"></i>
               </span>
-              Application
+              Predict
             </a>
           </li>
         </ul>
@@ -170,20 +143,6 @@
           </a>
         </div>
 
-        <!-- this part is hidden for xs screens -->
-        <!-- search form! link it to your search server -->
-        <!-- <form class="navbar-form" role="search">
-                <div class="form-group">
-                    <div class="input-group input-group-no-border">
-                        <input class="form-control" type="text" placeholder="Search Dashboard">
-                        <span class="input-group-append">
-                            <span class="input-group-text">
-                                <i class="la la-search"></i>
-                            </span>
-                        </span>
-                    </div>
-                </div>
-            </form> -->
         <ul class="nav navbar-nav float-right">
           <li class="dropdown nav-item navbar-header mobile-hidden">
             <label for="language">Switch Language：</label

@@ -8,11 +8,11 @@ bp = Blueprint(name="train_orgin", import_name=__name__, url_prefix="/train_orgi
 
 
 @bp.route("/run", methods=["GET", "POST"])
-def run():
+def run_cls():
     if request.method == "GET":
-        return render_template("train.html")
+        return render_template("templates_cls/train.html")
 
 
 @bp.route("/tensorboard", methods=["GET", "POST"])
-def tensorboard():
-    return render_template("tensorboard.html")
+def tensorboard_cls():
+    return render_template("templates_cls/tensorboard.html")

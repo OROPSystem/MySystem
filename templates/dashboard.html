@@ -1,123 +1,130 @@
-{% extends "base.html" %}
-{% import 'bootstrap/wtf.html' as wtf %}
+{% extends "base.html" %} {% import 'bootstrap/wtf.html' as wtf %} {% block
+styles %} {{ super() }}
+<link
+  href="{{ url_for('static', filename='base/css/tables.css') }}"
+  rel="stylesheet"
+/>
+<style>
+  h5 {
+    color: darkblue;
+  }
 
+  p {
+    text-align: justify;
+  }
+</style>
+{% endblock %} {% block content %}
 
-{% block styles %}
-    {{ super() }}
-    <link href="{{ url_for('static', filename='base/css/tables.css') }}" rel="stylesheet">
-    <style>
-        h5 {
-            color: darkblue
-        }
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">YOU ARE HERE</li>
+  <li class="breadcrumb-item active">Home</li>
+</ol>
 
-        p {
-            text-align: justify;
-        }
-    </style>
-{% endblock %}
+<div class="row">
+  <div class="col-lg-5">
+    <section class="widget min-height-300 widget-overflow">
+      <header>
+        <h5>
+          <b>
+            <span
+              class="fw-semi-bold"
+              onclick="window.location.href='https://mp.weixin.qq.com/s/Q2YfsHhOuIOqGGOxrYpRMA'"
+              >团队简介</span
+            ></b
+          >
+        </h5>
+      </header>
 
-{% block content %}
+      <div>
+        <p id="teamIntroInfo">
+          <br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          从2000年开始，本团队一直从事运筹与优化领域的教学和科研工作，团队负责人为<b>高亮教授，李培根院士</b>为学术顾问，共有教师13人（含博士后），其中中国工程院院士1人、加拿大工程院院士1人、国家杰青1人、青年长江1人。主要研究方向包括：车间调度、拓扑优化、工业大数据与深度学习、智能优化算法、人形机器人与双臂协作机器人等。是数字制造装备与技术国家重点实验室、国家智能设计与数控技术创新中心、国家基金委“机器人化智能制造”基础科学中心等国家级科研平台的核心团队之一。
+          <br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          本团队累计承担973计划、国基金重点、国家重点研发计划等国家级科研项目50余项；出版教材/专著近20部，发表SCI论文500余篇；获国家科技进步二等奖、国家教学成果二等奖、教育部自然科学一等奖等省部级以上教学与科研奖励10余项。指导学生获得国家级学科竞赛特等/一等奖励20余项。
+        </p>
+      </div>
+      <br />
+      <header>
+        <h5>
+          <b> <span class="fw-semi-bold">系统简介</span></b>
+        </h5>
+      </header>
+      <div>
+        <p>
+          <br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          表面缺陷工业智能检测系统主要包括：<b>缺陷识别，缺陷分割，缺陷检测</b>等模块，后续还会添加故障诊断等。当前为<b>2.0beta</b>版本，主要在1.0版本的基础上开发，保持了第一代缺陷识别系统的整体构架，拖拽模块等功能，增加了算法模型库和缺陷数据库，并针对表面缺陷的检测，定位任务进行开发，增加缺陷分割和缺陷检测的数据库和算法模型库，并完善了模型的训练和实时检测功能。
+        </p>
+      </div>
+    </section>
+  </div>
+  <div class="col-lg-7" id="generate_div">
+    <section class="widget min-height-300 widget-overflow">
+      <header>
+        <h5>
+          <b>缺陷检测系统已有模型</b>
+        </h5>
+      </header>
+      <br />
+      <ul>
+        <li><b>VGG16</b></li>
+        <li><b>DenseNet</b></li>
+        <li><b>Residual Network</b></li>
+        <li><b>Unet</b></li>
+        <li><b>YOLO</b></li>
+      </ul>
+      <p>
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <!-- 空格-->
+        Please see the Applicatiom for more models.
+      </p>
+      <header>
+        <h5>
+          <b>缺陷检测系统数据集</b>
+        </h5>
+      </header>
+      <br />
+      <ul>
+        <b>
+          <li>NEU-CLS</li>
+          <li>DeepPCB</li>
+          <li>MTD</li>
+          <li>NEU-DET</li>
+          <li>KSDD</li>
+        </b>
+      </ul>
+      <p>
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Please see the Applicatiom for more
+        datasets.
+      </p>
+      <header>
+        <h5>
+          <b>缺陷检测系统开发人员</b>
+        </h5>
+      </header>
+      <br />
+      <p>
+        <b>
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 李新宇&nbsp&nbsp&nbsp
+          彭旭东&nbsp&nbsp&nbsp 肖畅奇&nbsp&nbsp&nbsp 高艺平&nbsp&nbsp&nbsp
+          杜宗伟&nbsp&nbsp&nbsp 鲁烈志&nbsp&nbsp&nbsp 柯审强&nbsp&nbsp&nbsp
+          孙晨&nbsp&nbsp&nbsp
+        </b>
+      </p>
+    </section>
+  </div>
+</div>
 
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">YOU ARE HERE</li>
-        <li class="breadcrumb-item active"> Home</li>
-    </ol>
-    <div class="row">
-        <div class="col-lg-5">
-            <section class="widget min-height-300 widget-overflow">
-                <header>
-                    <h5>
-                        <b> <span class="fw-semi-bold">团队简介</span></b>
-                    </h5>
-                </header>
-                <div>
-                    <p id="teamIntroInfo">
-                        <br>
-                    </p>
-                </div>
-                <br>
-                <header>
-                    <h5>
-                        <b> <span class="fw-semi-bold">系统简介</span></b>
-                    </h5>
-                </header>
-                <div>
-                    <p>
-                        <br>
-                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                        表面缺陷智能识别系统主要包括了：数据导入，数据增强，模型搭建，模型载入，模型保存，结果可视化等模块。
-                        整个缺陷识别系统包括了缺陷识别的数据库和算法模型库，缺陷识别模型以卷积神经网络为主，可以实现导入以后模型，也可以利用拖拽模块进行搭建。
-                        当前为1.0 beta版本，主要适用于表面缺陷的分类问题，后续还会针对表面缺陷的检测，定位等任务继续开发。
-                    </p>
-                </div>
-            </section>
-        </div>
-        <div class="col-lg-7" id="generate_div">
-            <section class="widget min-height-300 widget-overflow">
-                <header>
-                    <h5>
-                        <b>缺陷识别系统已有模型</b>
-                    </h5>
-                </header>
-                <br>
-                <ul>
+{% endblock %} {% block scripts %} {{ super() }}
+<script type="text/javascript">
+  $(document).ready(function () {
+    $("#sb-dashboard").addClass("active");
+  });
 
-                    <li><b>VGG16</b></li>
-                    <li><b>DenseNet</b></li>
-                    <li><b>Residual Network</b></li>
-
-                </ul>
-                <p>
-                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  <!-- 空格-->
-                    Some models have same structure.
-                </p>
-                <header>
-                    <h5>
-                        <b>缺陷识别系统数据集</b>
-                    </h5>
-                </header>
-                <br>
-                <ul>
-                    <b>
-                        <li>Iris</li>
-                        <li>NEU-CLS</li>
-                    </b>
-                </ul>
-                <p>
-                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                    NEU surface defect database
-                </p>
-                <header>
-                    <h5>
-                        <b>缺陷识别系统开发人员</b>
-                    </h5>
-                </header>
-                <br>
-                <p>
-                    <b>
-                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-
-                        {#                        李新宇&nbsp&nbsp&nbsp#}
-                        {#                        彭旭东&nbsp&nbsp&nbsp#}
-                        {#                        肖畅奇&nbsp&nbsp&nbsp#}
-                        {#                        高艺平#}
-                    </b>
-                </p>
-            </section>
-        </div>
-    </div>
-
-{% endblock %}
-
-{% block scripts %}
-    {{ super() }}
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#sb-dashboard').addClass('active');
-        });
-
-        function change_text(language) {
-            $("#teamIntroInfo").append(language["teamIntroInfo"]);
-        }
-    </script>
+  function change_text(language) {
+    $("#teamIntroInfo").append(language["teamIntroInfo"]);
+  }
+</script>
 {% endblock %}
