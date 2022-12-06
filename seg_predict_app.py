@@ -87,6 +87,7 @@ def predict_pytorch(params, segmentor, predict_button):
     # get params config
     # ------------------------
     model = params["model"]
+    backbone = model.split('_')[1]
     device = params["device"]
     dataset_name = params["dataset"]
     img = params["img"]
@@ -110,7 +111,7 @@ def predict_pytorch(params, segmentor, predict_button):
         with st.container():
             st.image(image, caption='Original Image', use_column_width=True)
 
-    preprocessing_fn = smp.encoders.get_preprocessing_fn("resnet34", "imagenet")
+    preprocessing_fn = smp.encoders.get_preprocessing_fn(f"{backbone}", "imagenet")
     preprocessing = get_preprocessing(preprocessing_fn)
     sample = preprocessing(image=image)
     image = sample["image"]

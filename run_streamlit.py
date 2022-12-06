@@ -18,12 +18,18 @@ import os
 # os.system("streamlit run detect_predict_app.py --server.port 8504 --server.fileWatcherType none")
 
 
-# os.system("streamlit run upload_image_app.py --server.port 8500 --server.fileWatcherType none & " +
-#           "streamlit run cls_train_app.py --server.port 8501 --server.fileWatcherType none & " +
-#           "streamlit run cls_predict_app.py --server.port 8502 --server.fileWatcherType none &" +
-#           "streamlit run seg_predict_app.py --server.port 8602 --server.fileWatcherType none &" +
+os.system("streamlit run upload_image_app.py --server.port 8500 --server.fileWatcherType none & " +
+          "streamlit run cls_train_app.py --server.port 8501 --server.fileWatcherType none & " +
+          "streamlit run cls_predict_app.py --server.port 8502 --server.fileWatcherType none &" +
+          "streamlit run seg_predict_app.py --server.port 8602 --server.fileWatcherType none &" +
+          "streamlit run det_predict_app.py --server.port 8702 --server.fileWatcherType none &"
+          )
+
+# for debug
+# os.system("streamlit run seg_predict_app.py --server.port 8602 --server.fileWatcherType none &" +
 #           "streamlit run det_predict_app.py --server.port 8702 --server.fileWatcherType none &"
 #           )
 
-os.system("streamlit run det_predict_app.py --server.port 8702 --server.fileWatcherType none &"
-          )
+# for debug
+# os.system("streamlit run seg_predict_app.py --server.port 8602 --server.fileWatcherType none &"
+#           )

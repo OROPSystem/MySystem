@@ -27,17 +27,22 @@ tensorflow==2.9.1
 tensorflow_gpu==2.5.0
 tensorflowjs==3.18.0
 timm==0.5.4
-torch==1.11.0
-torchinfo==1.6.6
-torchvision==0.12.0
+# torch==1.11.0
+# torchinfo==1.6.6
+# torchvision==0.12.0
 traitlets==5.3.0
 Werkzeug==2.1.2
 WTForms==3.0.1
 mmcv-full==1.5.1
+
 # mmdet3.0
 # pip install openmim
 # mim install mmengine
 # mim install "mmdet>=3.0.0rc0"
+
+# torch版本和segmentation-models-pytorch版本会影响分割模型的兼容性
+# pip3 install torch==1.10.0+cu113 torchvision==0.11.1+cu113 torchaudio==0.10.0+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
+
 # segmentation-models-pytorch 
-git+https://github.com/qubvel/segmentation_models.pytorch
-albumentations
+# git+https://github.com/qubvel/segmentation_models.pytorch
+# albumentations
