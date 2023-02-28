@@ -57,15 +57,24 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">YOU ARE HERE</li>
+  <li class="breadcrumb-item active">Application</li>
   <li class="breadcrumb-item active">Defect Detection</li>
 </ol>
 
 <button
   class="backhome"
   style="vertical-align: middle"
+  onclick="window.location.href = '{{url_for('dashboard.dashboard_application')}}'"
+>
+  <span>Back </span>
+</button>
+
+<button
+  class="backhome"
+  style="vertical-align: middle"
   onclick="window.location.href = '{{url_for('dashboard.dashboard')}}'"
 >
-  <span>BackHome </span>
+  <span>Home </span>
 </button>
 
 {% endblock %} {% block scripts %} {{ super() }}

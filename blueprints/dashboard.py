@@ -23,6 +23,17 @@ def dashboard():
         zh=zh_json["Dashboard"]
     )
 
+@bp.route("/application", methods=["GET", "POST"])
+@login_required
+def dashboard_application():
+    # TODO 加入用户信息
+    # username = session["user"]
+    with open("language/text-zh.json", "r", encoding="utf-8") as f:
+        zh_json = json.load(f)
+    return render_template(
+        "application.html",
+        zh=zh_json["Dashboard"]
+    )
 
 @bp.route("/cls", methods=["GET", "POST"])
 @login_required
