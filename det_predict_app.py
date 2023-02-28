@@ -109,6 +109,7 @@ def predict_pytorch(params, detector, predict_button):
     # Predict
     # ------------------------
     if predict_button:
+        start_time = time.time()
 
         result = inference_detector(detector, image)
         random_name = time.time()
@@ -130,6 +131,9 @@ def predict_pytorch(params, detector, predict_button):
             with st.container():
                 # pred = cv2.resize(pred, ori_shape, interpolation=cv2.INTER_NEAREST)
                 st.image(pred, caption='Detection Box', use_column_width=True)
+
+        end_time = time.time()
+        st.subheader(f"Time cost : {end_time - start_time:.4f}s")
 
 def predict_tensorflow():
     pass

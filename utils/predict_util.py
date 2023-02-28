@@ -75,7 +75,8 @@ class ClassifyPredicter:
 
     def show_images(self):
         # privacy handle
-        self.__images = [item[0] for item in self.predict_dataset.imgs]
+        # fix utf-8 bug.
+        self.__images = [item[0].encode('utf-8', 'replace').decode('utf-8') for item in self.predict_dataset.imgs]
         st.sidebar.selectbox(label="Choose one image", options=self.__images)
         labels = [item[1] for item in self.predict_dataset.imgs]
         privacy_images = [self.dataset_name + i.split(self.dataset_name)[1] for i in self.__images]

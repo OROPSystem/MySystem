@@ -5,6 +5,7 @@ import torchinfo
 import torchvision
 import os
 import cv2
+import time
 import numpy as np
 import torch
 import torch.nn as nn
@@ -120,6 +121,8 @@ def predict_pytorch(params, segmentor, predict_button):
     # Predict
     # ------------------------
     if predict_button:
+        start_time = time.time()
+
         img = torch.from_numpy(image).unsqueeze(0).to(device)
         pred = segmentor(img)
         thresh=0.5
@@ -133,6 +136,9 @@ def predict_pytorch(params, segmentor, predict_button):
             with st.container():
                 pred = cv2.resize(pred, ori_shape, interpolation=cv2.INTER_NEAREST)
                 st.image(pred, caption='Segmentation Mask', use_column_width=True)
+
+        end_time = time.time()
+        st.subheader(f"Time cost : {end_time - start_time:.4f}s")
 
 def predict_tensorflow():
     pass

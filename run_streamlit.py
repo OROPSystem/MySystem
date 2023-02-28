@@ -26,8 +26,7 @@ os.system("streamlit run upload_image_app.py --server.port 8500 --server.fileWat
           )
 
 # for debug
-# os.system("streamlit run seg_predict_app.py --server.port 8602 --server.fileWatcherType none &" +
-#           "streamlit run det_predict_app.py --server.port 8702 --server.fileWatcherType none &"
+# os.system("streamlit run cls_train_app.py --server.port 8501 --server.fileWatcherType none &"
 #           )
 
 # for debug
