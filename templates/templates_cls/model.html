@@ -11,7 +11,17 @@ styles %} {{ super() }}
 {% endblock %} {% block content %} {# 面包屑导航#}
 <ol class="breadcrumb">
   <li class="breadcrumb-item">YOU ARE HERE</li>
-  <li class="breadcrumb-item active">Models</li>
+  <li class="breadcrumb-item active">
+    <a href='{{url_for('dashboard.dashboard_application')}}'>
+    Application 
+    </a>
+  </li>
+  <li class="breadcrumb-item active"> 
+    <a href='{{url_for('dashboard.dashboard_cls')}}'>
+    Defect Classification
+    </a>
+  </li>
+  <li class="breadcrumb-item">Models</li>
 </ol>
 {#
 <div class="layer">

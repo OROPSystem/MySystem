@@ -57,8 +57,16 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">YOU ARE HERE</li>
-  <li class="breadcrumb-item active">Application</li>
-  <li class="breadcrumb-item active">Defect Detection</li>
+  <li class="breadcrumb-item active">
+    <a href='{{url_for('dashboard.dashboard_application')}}'>
+    Application 
+    </a>
+  </li>
+  <li class="breadcrumb-item active"> 
+    <a href='{{url_for('dashboard.dashboard_det')}}'>
+    Defect Detection
+    </a>
+  </li>
 </ol>
 
 <button
