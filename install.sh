@@ -32,6 +32,11 @@ pip install Werkzeug==2.1.2
 pip install WTForms==3.0.1
 pip install mmcv-full==1.5.1
 
+pip install sqlalchemy==1.4.36
+pip install email_validator==1.2.1
+pip install torchinfo==1.7.2
+
+
 # torch版本和segmentation-models-pytorch版本会影响分割模型的兼容性
 pip3 install torch==1.10.0+cu113 torchvision==0.11.1+cu113 torchaudio==0.10.0+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html
 
