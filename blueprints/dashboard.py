@@ -79,3 +79,4 @@ def dashboard_fd():
         "templates_fd/dashboard.html",
         zh=zh_json["Dashboard"]
     )
+    
