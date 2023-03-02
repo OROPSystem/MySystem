@@ -15,3 +15,7 @@ def predict_seg():
 @bp.route('/det', methods=["GET", "POST"])
 def predict_det():
     return render_template("templates_det/predict.html")
+
+@bp.route('/fd', methods=["GET", "POST"])
+def predict_fd():
+    return render_template("templates_fd/predict.html")
