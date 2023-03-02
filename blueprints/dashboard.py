@@ -68,7 +68,7 @@ def dashboard_det():
         "templates_det/dashboard.html",
         zh=zh_json["Dashboard"]
     )
-    
+
 @bp.route("/fd", methods=["GET", "POST"])
 @login_required
 def dashboard_fd():
