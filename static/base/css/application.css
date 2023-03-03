@@ -10737,6 +10737,10 @@ a.text-default:hover, a.text-default:focus {
     content: "\f14c";
 }
 
+.flaticon-data-preprocessing:before{
+    content: '\f123'
+}
+
 .flaticon-diamond:before {
     content: "\f14d";
 }
