@@ -19,19 +19,19 @@ import os
 
 
 os.system(
-    #"streamlit run upload_image_app.py --server.port 8500 --server.fileWatcherType none & " +
+    "streamlit run upload_image_app.py --server.port 8500 --server.fileWatcherType none &" +
     # 缺陷分类
-    #"streamlit run cls_train_app.py --server.port 8501 --server.fileWatcherType none & " +
-    #"streamlit run cls_predict_app.py --server.port 8502 --server.fileWatcherType none &" +
+    "streamlit run cls_train_app.py --server.port 8501 --server.fileWatcherType none &" +
+    "streamlit run cls_predict_app.py --server.port 8502 --server.fileWatcherType none &" +
     # 缺陷分割
-    #"streamlit run seg_predict_app.py --server.port 8602 --server.fileWatcherType none &" +
+    "streamlit run seg_predict_app.py --server.port 8602 --server.fileWatcherType none &" +
     # 缺陷检测
-    #"streamlit run det_predict_app.py --server.port 8702 --server.fileWatcherType none &" +
+    "streamlit run det_predict_app.py --server.port 8702 --server.fileWatcherType none &" +
     # 故障诊断
-    #"streamlit run fd_predict_app.py --server.port 8801 --server.fileWatcherType none &" +
-    "streamlit run fd_preprocessing_app.py --server.port 8802 --server.fileWatcherType none &" 
+    "streamlit run fd_predict_app.py --server.port 8801 --server.fileWatcherType none &" +
+    "streamlit run fd_preprocessing_app.py --server.port 8802 --server.fileWatcherType none &" +
     # 图像采集
-    #"streamlit run image_capture_app.py --server.port 8901 --server.fileWatcherType none &"
+    "streamlit run image_capture_app.py --server.port 8901 --server.fileWatcherType none &"
     )
 
 #
