@@ -10,12 +10,12 @@ from scipy import fftpack
 import pandas as pd
 import pywt
  
+ 
 st.set_page_config(
     page_title=None,
     page_icon=None,
     layout="wide",
 )
-
 
 
 def main():
@@ -35,13 +35,13 @@ def main():
         
     with col2:    
         fault_type_range = pathlib.Path(f"./user_data/test/fd_datasets/{dataset}/{loads}")
-        chosen_fault_type = st.selectbox(label="chosen_fault_type", options=os.listdir(fault_type_range))
+        chosen_fault_type = st.selectbox(label="Chosen Fault Type", options=os.listdir(fault_type_range))
         params["chosen_fault_type"] = chosen_fault_type
         
         signal_size = st.number_input(label='Signal Size', value=1200)
         params['signal_size'] = signal_size
     
-    col1, col2, col3 = st.columns([2,3,3], gap='small')
+    col1, col2, col3 = st.columns([2,2,3], gap='small')
     
     # page in col1
     with col1:
@@ -49,31 +49,35 @@ def main():
         clicked = False
         col1_1, col1_2 = st.columns(2)
         with col1_1:
-            button1 = st.button('FFT')
+            button1 = st.button('FFT', use_container_width=True)
             if button1:
                 params["button"] = 1 
-            button2 = st.button('SDP')
+            button2 = st.button('SDP', use_container_width=True)
             if button2:
                 params["button"] = 2    
-            button3 = st.button('CWT')
+            button3 = st.button('CWT', use_container_width=True)
             if button3:
                 params["button"] = 3  
-            button4 = st.button('ES')
+            button4 = st.button('Envelop Spectrum', use_container_width=True)
             if button4:
                 params["button"] = 4  
         with col1_2:
-            button5 = st.button('button5')
+            button5 = st.button('button5', use_container_width=True)
             if button5:
                 params["button"] = 5
-            button6 = st.button('button6')
+            button6 = st.button('button6', use_container_width=True)
             if button6:
                 params["button"] = 6
-            button7 = st.button('button7')
+            button7 = st.button('button7', use_container_width=True)
             if button7:
                 params["button"] = 7
-            button8 = st.button('button8')
+            button8 = st.button('button8', use_container_width=True)
             if button8:
                 params["button"] = 8
+        # 将button值及时存于外部文件，以防刷新
+        s = open("./user_data/preprocessing.txt", 'w') 
+        s.write(str(params["button"]))
+        s.close()
 
     params['flag'] = False
     # page in col2
@@ -81,55 +85,39 @@ def main():
         st.header("Parameters Setting")
         if "button" in params.keys():
             if params["button"] == 1:
-                s = open("./user_data/preprocessing.txt", 'w') 
-                s.write(str(params["button"]))
-                s.close()
                 with st.form("template_input"):
                     frequency_sampling = st.number_input("frequency_sampling(*1e3 Hz)", value=25.6)
                     submit = st.form_submit_button()
-                
                 if submit:
                     params['flag'] = True
                     params["frequency_sampling"] = frequency_sampling * 1000
-                    
-                    
+                           
             if params["button"] == 2:
-                s = open("./user_data/preprocessing.txt", 'w') 
-                s.write(str(params["button"]))
-                s.close()
                 with st.form("template_input"):
                     submit = st.form_submit_button()
-                
                 if submit:
                     params['flag'] = True
                     
             if params["button"] == 3:
-                s = open("./user_data/preprocessing.txt", 'w') 
-                s.write(str(params["button"]))
-                s.close()
                 with st.form("template_input"):
                     frequency_sampling = st.number_input("frequency_sampling(*1e3 Hz)", value=25.6)
                     submit = st.form_submit_button()
-                
                 if submit:
                     params['flag'] = True
                     params["frequency_sampling"] = frequency_sampling * 1000
             
             if params["button"] == 4:
-                s = open("./user_data/preprocessing.txt", 'w') 
-                s.write(str(params["button"]))
-                s.close()
                 with st.form("template_input"):
                     frequency_sampling = st.number_input("frequency_sampling(*1e3 Hz)", value=25.6)
                     esLim_lower = st.number_input("esLim_lower", value=0)
                     esLim_upper = st.number_input("esLim_upper", value=500)
                     submit = st.form_submit_button()
-                
                 if submit:
                     params['flag'] = True
                     params["frequency_sampling"] = frequency_sampling * 1000
                     params["esLim_lower"] = esLim_lower
                     params["esLim_upper"] = esLim_upper
+                    
     st.set_option('deprecation.showPyplotGlobalUse', False)   
      
     # page in col3
@@ -137,9 +125,9 @@ def main():
         st.header("Data Transform")
         if params['flag']:
             preprocessing(params)
-        
-    return params["button"]
 
+
+##### FFT
 def FFT(Fs, data):
     """
     对输入信号进行FFT
@@ -156,6 +144,7 @@ def FFT(Fs, data):
     plt.title('Frequency-Domain Data by FFT')
     st.pyplot()
     
+    
 ##### SDP
 def SDPimage(s):
     """
@@ -169,6 +158,7 @@ def SDPimage(s):
         plt.title('Frequency-Domain Data by SDP')
         plt.polar(th*(np.pi/180), rs, '.b')
     st.pyplot()
+ 
     
 ##### 连续小波变换时频图
 def CWTimage(fs,s):
@@ -189,7 +179,6 @@ def CWTimage(fs,s):
     st.pyplot()
 
 
-
 ##### 包络谱
 def Envelopspectrum(signal, Fs, esLim_lower, esLim_upper):
     """
@@ -198,7 +187,6 @@ def Envelopspectrum(signal, Fs, esLim_lower, esLim_upper):
     # Fs     采样率
     # esLim  分析频率范围
     """
-     
     signal = signal / abs(np.max(signal))
     a_signal_raw = fftpack.hilbert(signal)
     hx_raw_abs = abs(a_signal_raw)
@@ -217,7 +205,8 @@ def Envelopspectrum(signal, Fs, esLim_lower, esLim_upper):
     plt.xlim([esLim_lower, esLim_upper])
     st.pyplot()
 
-    
+
+# preprocessing
 def preprocessing(params):
     chosen_fault = "./user_data/test/fd_datasets/{}/{}/{}".format(params["dataset"], params["load"], params['chosen_fault_type'])
     
@@ -233,7 +222,6 @@ def preprocessing(params):
     plt.title('Time-Series Data')
     st.pyplot()
     
-    print(params["button"])
     if params["button"] == 1:
         FFT(params["frequency_sampling"], file_data)
     if params["button"] == 2:
@@ -243,13 +231,14 @@ def preprocessing(params):
     if params["button"] == 4:
         Envelopspectrum(file_data, params["frequency_sampling"], params["esLim_lower"], params["esLim_upper"])
 
+# 读取外部存储的button值
 s = open("./user_data/preprocessing.txt", 'r')  
 button = s.read()
 s.close()
+
 
 if __name__ == '__main__':
     # return Dict
     params = collections.defaultdict()
     params["button"] = int(button)
     main()
-
