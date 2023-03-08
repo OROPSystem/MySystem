@@ -29,9 +29,7 @@ os.system(
     "streamlit run det_predict_app.py --server.port 8702 --server.fileWatcherType none &" +
     # 故障诊断
     "streamlit run fd_predict_app.py --server.port 8801 --server.fileWatcherType none &" +
-    "streamlit run fd_preprocessing_app.py --server.port 8802 --server.fileWatcherType none &" +
+    "streamlit run fd_preprocessing_app.py --server.port 8802 --server.fileWatcherType none &"
     # 图像采集
-    "streamlit run image_capture_app.py --server.port 8901 --server.fileWatcherType none &"
+    # "streamlit run image_capture_app.py --server.port 8901 --server.fileWatcherType none &"
     )
-
-#
