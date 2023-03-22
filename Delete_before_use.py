@@ -1,5 +1,6 @@
-score=1
-s = open("./user_data/preprocessing.txt", 'w') 
-s.write(str(score))
-s.close()
+import streamlit as st
 
+picture = st.camera_input("Take a picture")
+
+if picture:
+    st.image(picture)

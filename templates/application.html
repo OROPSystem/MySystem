@@ -45,6 +45,13 @@
           <input class="btn" type="button" value="查看更多" onclick='fd()'/>
         </div>
       </div>
+      <div class="card_combine">
+        <div class="content_combine">
+          <h2>图像采集</h2>
+          <p></p>
+          <input class="btn" type="button" value="查看更多" onclick='ic()'/>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -64,6 +71,10 @@
   
   function fd() {
     window.location.href = "{{url_for('dashboard.dashboard_fd')}}";
+  }
+
+  function ic() {
+    window.location.href = "{{url_for('dashboard.dashboard_ic')}}";
   }
 </script>
 

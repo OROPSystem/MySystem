@@ -79,4 +79,14 @@ def dashboard_fd():
         "templates_fd/dashboard.html",
         zh=zh_json["Dashboard"]
     )
-    
+
+@bp.route("/ic", methods=["GET", "POST"])
+@login_required
+def dashboard_ic():
+    # username = session["user"]
+    with open("language/text-zh.json", "r", encoding="utf-8") as f:
+        zh_json = json.load(f)
+    return render_template(
+        "templates_ic/dashboard.html",
+        zh=zh_json["Dashboard"]
+    )

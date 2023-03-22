@@ -1,0 +1,98 @@
+{% extends "templates_ic/base.html" %} {% import 'bootstrap/wtf.html' as wtf %}
+{% block styles %} {{ super() }}
+<link
+  href="{{ url_for('static', filename='base/css/tables.css') }}"
+  rel="stylesheet"
+/>
+<style>
+  h5 {
+    color: darkblue;
+  }
+
+  p {
+    text-align: justify;
+  }
+
+  .backhome {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #e7e7e7;
+    border: none;
+    color: #555555;
+    text-align: center;
+    font-size: 10px;
+    padding: 20px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+  }
+
+  .backhome span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+
+  .backhome span:after {
+    content: "»";
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+
+  .backhome:hover span {
+    padding-right: 25px;
+  }
+
+  .backhome:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+</style>
+{% endblock %} {% block content %}
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">YOU ARE HERE</li>
+  <li class="breadcrumb-item active">
+    <a href='{{url_for('dashboard.dashboard_application')}}'>
+    Application 
+    </a>
+  </li>
+  <li class="breadcrumb-item active"> 
+    <a href='{{url_for('dashboard.dashboard_ic')}}'>
+    Image Capture
+    </a>
+  </li>
+</ol>
+
+<button
+  class="backhome"
+  style="vertical-align: middle"
+  onclick="window.location.href = '{{url_for('dashboard.dashboard_application')}}'"
+>
+  <span>Back </span>
+</button>
+
+<button
+  class="backhome"
+  style="vertical-align: middle"
+  onclick="window.location.href = '{{url_for('dashboard.dashboard')}}'"
+>
+  <span>Home </span>
+</button>
+
+{% endblock %} {% block scripts %} {{ super() }}
+<script type="text/javascript">
+  $(document).ready(function () {
+    $("#sb-dashboard").addClass("active");
+  });
+
+  function change_text(language) {
+    $("#teamIntroInfo").append(language["teamIntroInfo"]);
+  }
+</script>
+{% endblock %}
