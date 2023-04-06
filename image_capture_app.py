@@ -16,8 +16,8 @@ def get_streamlit_params():
         filename = st.text_input("Filename")
     with col2:
         cap = st.camera_input("Grab Images")
-        if cap:
-            st.image(cap)
+        # if cap:
+        #     st.image(cap)
             
 def main():
     params = get_streamlit_params()
