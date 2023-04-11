@@ -48,10 +48,30 @@ models = {
         "task": "NEU-CLS",
         "introduction": "abcdefg hijk lmn opq rst uvw xyz"
     },
-
-
+    8: {
+        "model_name": "1D-Resnet18",
+        "author": "Shenqiang Ke",
+        "library": "Pytorch",
+        "task": "HUST-Motor",
+        "introduction": "abcdefg hijk lmn opq rst uvw xyz"
+    },
+    9: {
+        "model_name": "WDCNN",
+        "author": "Shenqiang Ke",
+        "library": "Pytoch",
+        "task": "CWRU-Bearing",
+        "introduction": "abcdefg hijk lmn opq rst uvw xyz"
+    },
+    10: {
+        "model_name": "LSTM-Attention",
+        "author": "Li Wang",
+        "library": "Pytoch",
+        "task": "PU-Bearing",
+        "introduction": "abcdefg hijk lmn opq rst uvw xyz"
+    },
+    
 }
-total = 7
+total = 10
 
 function create_model(model_info) {
     let block = $("<div></div>").addClass("model");
