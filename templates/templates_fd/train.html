@@ -1,0 +1,26 @@
+{% extends "templates_fd/base.html" %} {% block styles %} {{ super() }}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='train/css/train.css') }}"
+/>
+{% endblock %} {% block content %} {{ super() }}
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">YOU ARE HERE</li>
+  <li class="breadcrumb-item active">
+    <a href='{{url_for('dashboard.dashboard_application')}}'>
+    Application 
+    </a>
+  </li>
+  <li class="breadcrumb-item active"> 
+    <a href='{{url_for('dashboard.dashboard_fd')}}'>
+    Fault Diagnosis
+    </a>
+  </li>
+  <li class="breadcrumb-item active">Train</li>
+</ol>
+
+<div class="iframe-container">
+  <iframe src="http://localhost:8803"></iframe>
+</div>
+{% endblock %} {% block scripts %} {{ super() }} {% endblock %}

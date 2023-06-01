@@ -24,28 +24,28 @@ def main():
     col1, col2 = st.columns(2)
     with col1:
         datasets_name = pathlib.Path(f"./user_data/test/fd_datasets").iterdir()
-        dataset = st.selectbox(label="Dataset", options=[n.stem for n in datasets_name if n.is_dir()])
+        dataset = st.selectbox(label="数据集", options=[n.stem for n in datasets_name if n.is_dir()])
         params["dataset"] = dataset
         
         # Choose the load
     
         load_range = pathlib.Path(f"./user_data/test/fd_datasets/{dataset}")
-        loads = st.selectbox(label="Load", options=os.listdir(load_range))
+        loads = st.selectbox(label="负载", options=os.listdir(load_range))
         params['load'] = loads
         
     with col2:    
         fault_type_range = pathlib.Path(f"./user_data/test/fd_datasets/{dataset}/{loads}")
-        chosen_fault_type = st.selectbox(label="Chosen Fault Type", options=os.listdir(fault_type_range))
+        chosen_fault_type = st.selectbox(label="选择故障类型", options=os.listdir(fault_type_range))
         params["chosen_fault_type"] = chosen_fault_type
         
-        signal_size = st.number_input(label='Signal Size', value=1200)
+        signal_size = st.number_input(label='信号长度', value=1200)
         params['signal_size'] = signal_size
     
-    col1, col2, col3 = st.columns([2,2,3], gap='small')
+    col1, col2 = st.columns([2,2], gap='small')
     
     # page in col1
     with col1:
-        st.header("Data Preprocessing Type")
+        st.header("数据预处理类型")
         clicked = False
         col1_1, col1_2 = st.columns(2)
         with col1_1:
@@ -82,37 +82,37 @@ def main():
     params['flag'] = False
     # page in col2
     with col2:
-        st.header("Parameters Setting")
+        st.header("参数设置")
         if "button" in params.keys():
             if params["button"] == 1:
-                st.text("FFT")
+                st.text("当前数据预处理类型:FFT")
                 with st.form("template_input"):
-                    frequency_sampling = st.number_input("frequency_sampling(*1e3 Hz)", value=25.6)
+                    frequency_sampling = st.number_input("采样频率(*1e3 Hz):", value=25.6)
                     submit = st.form_submit_button()
                 if submit:
                     params['flag'] = True
                     params["frequency_sampling"] = frequency_sampling * 1000
                            
             if params["button"] == 2:
-                st.text("SDP")
+                st.text("当前数据预处理类型:SDP")
                 with st.form("template_input"):
                     submit = st.form_submit_button()
                 if submit:
                     params['flag'] = True
                     
             if params["button"] == 3:
-                st.text("CWT")
+                st.text("当前数据预处理类型:CWT")
                 with st.form("template_input"):
-                    frequency_sampling = st.number_input("frequency_sampling(*1e3 Hz)", value=25.6)
+                    frequency_sampling = st.number_input("采样频率(*1e3 Hz):", value=25.6)
                     submit = st.form_submit_button()
                 if submit:
                     params['flag'] = True
                     params["frequency_sampling"] = frequency_sampling * 1000
             
             if params["button"] == 4:
-                st.text("Envelop Spectrum")
+                st.text("当前数据预处理类型:Envelop Spectrum")
                 with st.form("template_input"):
-                    frequency_sampling = st.number_input("frequency_sampling(*1e3 Hz)", value=25.6)
+                    frequency_sampling = st.number_input("采样频率(*1e3 Hz):", value=25.6)
                     esLim_lower = st.number_input("esLim_lower", value=0.0)
                     esLim_upper = st.number_input("esLim_upper", value=500.0)
                     submit = st.form_submit_button()
@@ -123,9 +123,9 @@ def main():
                     params["esLim_upper"] = esLim_upper
             
             if params["button"] == 5:
-                st.text("Wavelet")
+                st.text("当前数据预处理类型:Wavelet")
                 with st.form("template_input"):
-                    frequency_sampling = st.number_input("frequency_sampling(*1e3 Hz)", value=25.6)
+                    frequency_sampling = st.number_input("采样频率(*1e3 Hz):", value=25.6)
                     Fmax = st.number_input("Frequency Max", value=0.0)
                     Fmin = st.number_input("Frequency Min", value=0.0)
                     df = st.number_input("Frequency Division", value=1.0)
@@ -140,9 +140,9 @@ def main():
                     params["wave_name"] = wave_name
                     
             if params["button"] == 6:
-                st.text("Stockwell")
+                st.text("当前数据预处理类型:Stockwell")
                 with st.form("template_input"):
-                    frequency_sampling = st.number_input("frequency_sampling(*1e3 Hz)", value=25.6)
+                    frequency_sampling = st.number_input("采样频率(*1e3 Hz):", value=25.6)
                     Fmax = st.number_input("Frequency Max", value=0.0)
                     Fmin = st.number_input("Frequency Min", value=0.0)
                     submit = st.form_submit_button()
@@ -153,9 +153,9 @@ def main():
                     params["Fmin"] = Fmin
                     
             if params["button"] == 7:
-                st.text("STFT")
+                st.text("当前数据预处理类型:STFT")
                 with st.form("template_input"):
-                    frequency_sampling = st.number_input("frequency_sampling(*1e3 Hz)", value=25.6)
+                    frequency_sampling = st.number_input("采样频率(*1e3 Hz):", value=25.6)
                     window = st.text_input("Window", value="hann")
                     nperseg = st.number_input("n_per_seg", value=256)
                     submit = st.form_submit_button()
@@ -167,9 +167,10 @@ def main():
                     
     st.set_option('deprecation.showPyplotGlobalUse', False)   
      
+    col3 = st.container()
     # page in col3
     with col3:
-        st.header("Data Transform")
+        st.header("数据转换")
         if params['flag']:
             preprocessing(params)
 
@@ -187,6 +188,7 @@ def FFT(Fs, data):
     result = np.abs(fft(x=data, n=int(N))) / L * 2
     axisFreq = np.arange(int(N / 2)) * Fs / N
     result = result[range(int(N / 2))]
+    plt.figure(figsize=[6, 4.5])
     plt.plot(result)
     plt.title('Frequency-Domain Data by FFT')
     st.pyplot()
@@ -198,6 +200,7 @@ def SDPimage(s):
     # 获取 symmetrized dot pattern 结果
     # s 输入信号
     """
+    plt.figure(figsize=[6, 4.5])
     for i in range(1,7):
         rs = (s - np.min(s)) / (np.max(s) - np.min(s))
         th = (72*i + ((s - np.min(s)) / (np.max(s) - np.min(s)) * 36))[2:]     
@@ -218,6 +221,7 @@ def CWTimage(fs,s):
     cwtmatr, freqs = pywt.cwt(s, freq_range, 'morl') 
     t = (np.arange(0, len(s))) / fs
     
+    plt.figure(figsize=[6, 4.5])
     plt.contourf(t, freqs, np.abs(cwtmatr), 100)
     plt.title('Frequency-Domain Data by CWT')
     plt.ylabel('Frequency (Hz)')
@@ -245,6 +249,7 @@ def Envelopspectrum(signal, Fs, esLim_lower, esLim_upper):
     t1 = (np.arange(0, len(signal))) / Fs
     f1 = t1 * Fs * Fs / len(signal)
     
+    plt.figure(figsize=[6, 4.5])
     plt.plot(f1, es_raw_abs)
     plt.title('Envelope spectrum')
     plt.xlabel('Frequency(Hz)')
@@ -270,6 +275,8 @@ def wavelet(Fs,data, Fmin=0, Fmax=0, df=1, wave_name='morl'):
     total_scalas=int((Fmax-Fmin)/df)
     scales=(Fs*Fc)/(Fmin+df*np.arange(total_scalas, 1, -1))
     [result, freq]=pywt.cwt(data, scales, wave_name,1.0/Fs)
+    
+    plt.figure(figsize=[6, 4.5])
     plt.contourf(np.arange(len(data))*(1/Fs),freq,abs(result))
     st.pyplot()
 
@@ -289,6 +296,8 @@ def s_transform(Fs, data, Fmax=0, Fmin=0):
     Fmax_sample=int(Fmax/df)
     result=stockwell.st.st(data,Fmin_sample,Fmax_sample)
     extent=(0,1/df, Fmin,Fmax)
+    
+    plt.figure(figsize=[6, 4.5])
     plt.contourf(abs(result),origin='lower',extent=extent)
     st.pyplot()
 
@@ -305,11 +314,14 @@ def stft(Fs, data, window="hann", nperseg=256):
     noverlap=nperseg-1
     freq, t, result=signal.stft(data, Fs, window=window, nperseg=nperseg, noverlap=noverlap)
     extent=(t[0], t[-1], freq[0], freq[-1])
+    
+    plt.figure(figsize=[6, 4.5])
     plt.contourf(abs(result), origin='lower', extent=extent)
     st.pyplot()
 
 # preprocessing
 def preprocessing(params):
+    col1, col2 = st.columns(2)
     chosen_fault = "./user_data/test/fd_datasets/{}/{}/{}".format(params["dataset"], params["load"], params['chosen_fault_type'])
     
     file = open(chosen_fault, "r", encoding='gb18030', errors='ignore')
@@ -320,24 +332,27 @@ def preprocessing(params):
         file_data.append(eval(word[2]))   # Take a vibration signal in the x direction as input
     
     file_data = np.array(file_data).reshape(-1)[:params['signal_size']]
+    plt.figure(figsize=[6, 4.5])
     plt.plot(file_data)
     plt.title('Time-Series Data')
-    st.pyplot()
+    with col1:
+        st.pyplot()
     
-    if params["button"] == 1:
-        FFT(params["frequency_sampling"], file_data)
-    if params["button"] == 2:
-        SDPimage(file_data)
-    if params["button"] == 3:
-        CWTimage(params["frequency_sampling"], file_data)
-    if params["button"] == 4:
-        Envelopspectrum(file_data, params["frequency_sampling"], params["esLim_lower"], params["esLim_upper"])
-    if params["button"] == 5:
-        wavelet(params["frequency_sampling"], file_data, params["Fmin"], params["Fmax"], params["df"], params["wave_name"])
-    if params["button"] == 6:
-        s_transform(params["frequency_sampling"], file_data, params["Fmax"], params["Fmin"])
-    if params["button"] == 7:
-        stft(params["frequency_sampling"], file_data, params["window"], params["nperseg"])
+    with col2:
+        if params["button"] == 1:
+            FFT(params["frequency_sampling"], file_data)
+        if params["button"] == 2:
+            SDPimage(file_data)
+        if params["button"] == 3:
+            CWTimage(params["frequency_sampling"], file_data)
+        if params["button"] == 4:
+            Envelopspectrum(file_data, params["frequency_sampling"], params["esLim_lower"], params["esLim_upper"])
+        if params["button"] == 5:
+            wavelet(params["frequency_sampling"], file_data, params["Fmin"], params["Fmax"], params["df"], params["wave_name"])
+        if params["button"] == 6:
+            s_transform(params["frequency_sampling"], file_data, params["Fmax"], params["Fmin"])
+        if params["button"] == 7:
+            stft(params["frequency_sampling"], file_data, params["window"], params["nperseg"])
         
 # 读取外部存储的button值
 s = open("./user_data/preprocessing.txt", 'r')  
