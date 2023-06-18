@@ -143,8 +143,8 @@ def main():
                 st.text("当前数据预处理类型:Stockwell")
                 with st.form("template_input"):
                     frequency_sampling = st.number_input("采样频率(*1e3 Hz):", value=25.6)
-                    Fmax = st.number_input("Frequency Max", value=0.0)
-                    Fmin = st.number_input("Frequency Min", value=0.0)
+                    Fmax = st.number_input("最大频率", value=0.0)
+                    Fmin = st.number_input("最小频率", value=0.0)
                     submit = st.form_submit_button()
                 if submit:
                     params['flag'] = True

@@ -32,7 +32,7 @@ def get_streamlit_params():
     params = collections.defaultdict(int)
 
     # Choose the DL Library
-    library = st.sidebar.selectbox(label="深度学习框架", options=["PyTorch", "TensorFlow"], help="choose you library")
+    library = st.sidebar.selectbox(label="框架", options=["PyTorch", "TensorFlow"], help="choose you library")
     params["library"] = library
 
     # Choose the Device 
@@ -107,7 +107,7 @@ def predict_pytorch(params, fd_model, predict_button, data_analyze_button):
     # Title
     # ------------------------
     user_name = "test"
-    st.title("Fault Diagnosis")
+    st.title("故障诊断")
     # ------------------------
     # get params config
     # ------------------------
@@ -128,13 +128,13 @@ def predict_pytorch(params, fd_model, predict_button, data_analyze_button):
     # Data Analysis
     # ------------------------
     if data_analyze_button:
-        st.subheader("Original Data Analysis")
+        st.subheader("原始数据分析")
         
-        st.markdown('#### There are totally {} conditions in the chosen dataset'.format(len(files)))
+        st.markdown('在已选择的数据集中总共有 {} 种工况'.format(len(files)))
         
         for filename in files:
             condition = filename.split('/')[-1][:-4]
-            st.markdown('##### Condition: {}'.format(condition))
+            st.markdown('##### 工况: {}'.format(condition))
             
             file = open(filename, "r", encoding='gb18030', errors='ignore')
             file_data = []
@@ -179,9 +179,9 @@ def predict_pytorch(params, fd_model, predict_button, data_analyze_button):
         dataloaders = dataloader_create(train_dataset, test_dataset, no_test, len(files))
         test_loader = dataloaders['test']
         
-        st.subheader("Data Loading Success!!")
+        st.subheader("数据加载成功!!")
         
-        st.subheader('Start Predicting!!')
+        st.subheader('开始预测!!')
         model.eval()
 
         labels, pred_labels, features = [], [], []

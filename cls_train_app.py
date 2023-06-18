@@ -27,50 +27,50 @@ def get_streamlit_params():
     params = collections.defaultdict(int)
 
     # Choose the DL Library
-    library = st.sidebar.selectbox(label="Library", options=["PyTorch", "TensorFlow"], help="choose you library")
+    library = st.sidebar.selectbox(label="框架", options=["PyTorch", "TensorFlow"], help="选择框架")
     params["library"] = library
 
     # Choose the Device 
     if library == "PyTorch":
         available_gpus = ["cpu"] + ["cuda:" + str(i) for i in range(torch.cuda.device_count())]
-        device = st.sidebar.selectbox(label="Device", options=available_gpus)
+        device = st.sidebar.selectbox(label="设备", options=available_gpus)
         params["device"] = device
 
         # Choose the model
         models_path = pathlib.Path("")
         models_name = pathlib.Path(f"./user_data/test/models").rglob("*.pth")  # list models
-        model = st.sidebar.selectbox(label="Model", options=[n.stem for n in models_name])
+        model = st.sidebar.selectbox(label="模型", options=[n.stem for n in models_name])
         params["model"] = model
 
         # Choose the View Structure
-        view_structure = st.sidebar.checkbox(label="View Structure", value=False)
+        view_structure = st.sidebar.checkbox(label="架构可视化", value=False)
         params["view_structure"] = view_structure
 
         # Choose the dataset
         datasets_name = pathlib.Path(f"./user_data/test/datasets/image").iterdir()
-        dataset = st.sidebar.selectbox(label="Dataset", options=[n.stem for n in datasets_name if n.is_dir()])
+        dataset = st.sidebar.selectbox(label="数据集", options=[n.stem for n in datasets_name if n.is_dir()])
         params["dataset"] = dataset
 
         # Choose the split ratio
-        train_scale = st.sidebar.slider(label="Train Scale", min_value=0.0, max_value=1.0, value=0.8, step=0.01)
-        val_scale = st.sidebar.slider(label="Validate Scale", min_value=0.0, max_value=1.0, value=0.1, step=0.01)
-        test_scale = st.sidebar.slider(label="Test Scale", min_value=0.0, max_value=1.0, value=0.1, step=0.01)
+        train_scale = st.sidebar.slider(label="训练集规模", min_value=0.0, max_value=1.0, value=0.8, step=0.01)
+        val_scale = st.sidebar.slider(label="验证集规模", min_value=0.0, max_value=1.0, value=0.1, step=0.01)
+        test_scale = st.sidebar.slider(label="测试集规模", min_value=0.0, max_value=1.0, value=0.1, step=0.01)
         params["split_ratio"] = [train_scale, val_scale, test_scale]
 
         # Choose the image_size
-        img_resize = int(st.sidebar.number_input(label="Image Resize", min_value=0, max_value=256, step=1, value=224))
+        img_resize = int(st.sidebar.number_input(label="图像大小", min_value=0, max_value=256, step=1, value=224))
         params["img_resize"] = img_resize
 
         # Choose the learning rate
-        learning_rate = st.sidebar.slider(label="Learning Rate (x1e-4)", min_value=0.0, max_value=100.0, value=1., step=1.0)
+        learning_rate = st.sidebar.slider(label="学习率 (x1e-4)", min_value=0.0, max_value=100.0, value=1., step=1.0)
         params["lr"] = learning_rate * 1e-4
 
         # Choose the batch_size
-        batch_size = st.sidebar.slider(label="Batch Size", min_value=1, max_value=256, value=4, step=1)
+        batch_size = st.sidebar.slider(label="批量大小", min_value=1, max_value=256, value=4, step=1)
         params["bs"] = batch_size
 
         # Choose the epochs
-        epoch = st.sidebar.slider(label="Epochs", min_value=1, max_value=100, value=10, step=1)
+        epoch = st.sidebar.slider(label="迭代次数", min_value=1, max_value=100, value=10, step=1)
         params["epoch"] = epoch
 
     if library == "TensorFlow":
@@ -85,7 +85,7 @@ def train_pytorch(params, train_button, stop_button):
     # Title
     # ------------------------
     user_name = "test"
-    st.title("Train")
+    st.title("训练")
 
     # ------------------------
     # get params config
@@ -112,7 +112,7 @@ def train_pytorch(params, train_button, stop_button):
     # ------------------------
     if view_structure:
         # TODO 通道数自适应, 有一些channel=1, 显示不了
-        st.text(f"Input Shape \t\t\t\t ({batch_size}, {3}, {img_resize}, {img_resize})")
+        st.text(f"输入尺寸 \t\t\t\t ({batch_size}, {3}, {img_resize}, {img_resize})")
         st.text(torchinfo.summary(model, input_size=(batch_size, 3, img_resize, img_resize)))
 
     # ------------------------
@@ -130,7 +130,7 @@ def train_pytorch(params, train_button, stop_button):
         # 1. split dataset
         data_process = DatasetSplit(user_name=user_name, dataset_name=dataset)
         data_process.split_dataset(split_ratio=split_ratio)
-        st.subheader("Data Split Success!!")
+        st.subheader("数据集划分成功!!")
 
         # 2. create train dataset
         train_iter = data_process.create_dataloader_iterator(mode="train", batch_size=batch_size, trans=transform, shuffle=True, drop_last=True)
@@ -139,7 +139,7 @@ def train_pytorch(params, train_button, stop_button):
 
         # 3. trainer
         demo = Trainer(model, train_iter, valid_iter, epoch, lr, device=torch.device(device=device))
-        st.subheader("Start Training")
+        st.subheader("开始训练")
         demo.train()
 
     # TODO : 结束训练

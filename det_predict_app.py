@@ -24,29 +24,29 @@ def get_streamlit_params():
     params = collections.defaultdict(int)
 
     # Choose the DL Library
-    library = st.sidebar.selectbox(label="Library", options=["PyTorch", "TensorFlow"], help="choose you library")
+    library = st.sidebar.selectbox(label="框架", options=["PyTorch", "TensorFlow"], help="选择框架")
     params["library"] = library
 
     # Choose the Device 
     if library == "PyTorch":
         available_gpus = ["cpu"] + ["cuda:" + str(i) for i in range(torch.cuda.device_count())]
-        device = st.sidebar.selectbox(label="Device", options=available_gpus)
+        device = st.sidebar.selectbox(label="设备", options=available_gpus)
         params["device"] = device
 
         # Choose the model
         models_path = pathlib.Path("")
         models_name = pathlib.Path(f"./user_data/test/det_models").rglob("*.pth")  # list models
-        model = st.sidebar.selectbox(label="Model", options=[n.stem for n in models_name])
+        model = st.sidebar.selectbox(label="模型", options=[n.stem for n in models_name])
         params["model"] = model
 
         # Choose the dataset
         datasets_name = pathlib.Path(f"./user_data/test/det_datasets").iterdir()
-        dataset = st.sidebar.selectbox(label="Dataset", options=[n.stem for n in datasets_name if n.is_dir()])
+        dataset = st.sidebar.selectbox(label="数据集", options=[n.stem for n in datasets_name if n.is_dir()])
         params["dataset"] = dataset
         
         # Choose the images
         imgs_name = pathlib.Path(f"./user_data/test/det_datasets/{dataset}/JPEGImages")
-        imgs = st.sidebar.selectbox(label="Image", options=os.listdir(imgs_name))
+        imgs = st.sidebar.selectbox(label="图片", options=os.listdir(imgs_name))
         params["img"] = imgs
 
     if library == "TensorFlow":
@@ -75,8 +75,8 @@ def predict_pytorch(params, detector, predict_button):
     # Title
     # ------------------------
     user_name = "test"
-    st.title("Defect Detection")
-    st.subheader("Real-Time Detection")
+    st.title("缺陷检测")
+    st.subheader("实时检测")
 
     # ------------------------
     # get params config
@@ -103,7 +103,7 @@ def predict_pytorch(params, detector, predict_button):
     col1, col2 = st.columns(2)
     with col1:
         with st.container():
-            st.image(image, caption='Original Image', use_column_width=True)
+            st.image(image, caption='原始图像', use_column_width=True)
     
     # ------------------------
     # Predict
@@ -130,10 +130,10 @@ def predict_pytorch(params, detector, predict_button):
         with col2:
             with st.container():
                 # pred = cv2.resize(pred, ori_shape, interpolation=cv2.INTER_NEAREST)
-                st.image(pred, caption='Detection Box', use_column_width=True)
+                st.image(pred, caption='检测结果', use_column_width=True)
 
         end_time = time.time()
-        st.subheader(f"Time cost : {end_time - start_time:.4f}s")
+        st.subheader(f"耗时 : {end_time - start_time:.4f}s")
 
 def predict_tensorflow():
     pass
