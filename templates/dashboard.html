@@ -16,8 +16,8 @@ styles %} {{ super() }}
 {% endblock %} {% block content %}
 
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">YOU ARE HERE</li>
-  <li class="breadcrumb-item active">Home</li>
+  <li class="breadcrumb-item">您的位置</li>
+  <li class="breadcrumb-item active">主页</li>
 </ol>
 
 <div class="row">
@@ -78,7 +78,11 @@ styles %} {{ super() }}
       <p>
         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
         <!-- 空格-->
-        Please see the Applicatiom for more models.
+        可在
+          <a href='{{url_for('dashboard.dashboard_application')}}'>
+            应用程序
+          </a>
+        中查看更多
       </p>
       <header>
         <h5>
@@ -96,8 +100,12 @@ styles %} {{ super() }}
         </b>
       </ul>
       <p>
-        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Please see the Applicatiom for more
-        datasets.
+        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
+        可在
+          <a href='{{url_for('dashboard.dashboard_application')}}'>
+            应用程序
+          </a>
+        中查看更多
       </p>
       <header>
         <h5>
