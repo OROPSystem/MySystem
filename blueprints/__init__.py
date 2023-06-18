@@ -9,3 +9,5 @@ from .deployment import bp as deployment_bp
 from .models_storage import bp as models_storage_bp
 from .application import bp as application_bp
 from .models import bp as models_bp
+from .data_preprocessing import bp as data_preprocessing_bp
+from .image_capture import bp as image_capture_bp

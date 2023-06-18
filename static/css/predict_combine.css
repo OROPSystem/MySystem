@@ -61,10 +61,10 @@
 .card_combine:nth-child(3)::before{
     background-image: url(/static/images/detection.jpg);
 }
-/*
-.card_combine_combine:nth-child(4)::before{
-    background-image: url(/images/139/4.jpg);
-} */
+.card_combine:nth-child(4)::before{
+    background-image: url(/static/images/faultdiagnosis.jpg);
+}
+
 /* 遮罩 */
 .card_combine::after{
     content: "";

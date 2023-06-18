@@ -9,7 +9,9 @@ from blueprints import (user_bp,
                         test_bp,
                         deployment_bp,
                         models_storage_bp,
-                        application_bp)
+                        application_bp,
+                        data_preprocessing_bp,
+                        image_capture_bp)
 from flask_bootstrap import Bootstrap
 from flask_migrate import Migrate
 from extensions import db, mail, app
@@ -28,6 +30,8 @@ app.register_blueprint(test_bp)
 app.register_blueprint(deployment_bp)
 app.register_blueprint(models_storage_bp)
 app.register_blueprint(application_bp)
+app.register_blueprint(data_preprocessing_bp)
+app.register_blueprint(image_capture_bp)
 Bootstrap(app)
 
 # 设置密钥，用于hash加密

@@ -38,6 +38,7 @@ mmcv-full==1.5.1
 sqlalchemy==1.4.36
 email_validator==1.2.1
 torchinfo==1.7.2
+stockwell==1.0.7
 
 # mmdet3.0
 # pip install openmim
