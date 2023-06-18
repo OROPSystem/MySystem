@@ -56,15 +56,15 @@
 {% endblock %} {% block content %}
 
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">YOU ARE HERE</li>
+  <li class="breadcrumb-item">您的位置</li>
   <li class="breadcrumb-item active">
     <a href='{{url_for('dashboard.dashboard_application')}}'>
-    Application 
+    应用程序
     </a>
   </li>
   <li class="breadcrumb-item active"> 
     <a href='{{url_for('dashboard.dashboard_fd')}}'>
-    Fault Diagnosis
+    故障诊断
     </a>
   </li>
 </ol>
@@ -74,7 +74,7 @@
   style="vertical-align: middle"
   onclick="window.location.href = '{{url_for('dashboard.dashboard_application')}}'"
 >
-  <span>Back </span>
+  <span>返回 </span>
 </button>
 
 <button
@@ -82,7 +82,7 @@
   style="vertical-align: middle"
   onclick="window.location.href = '{{url_for('dashboard.dashboard')}}'"
 >
-  <span>Home </span>
+  <span>主页 </span>
 </button>
 
 {% endblock %} {% block scripts %} {{ super() }}

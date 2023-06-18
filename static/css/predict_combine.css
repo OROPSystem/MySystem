@@ -51,7 +51,7 @@
     /* 过渡效果: css属性名 时长 贝塞尔曲线 */
     transition: transform 1s cubic-bezier(0.19,1,0.22,1);
 }
-/* 分别设置图片 */
+/* 分别设置应用程序图片 */
 .card_combine:nth-child(1)::before{
     background-image: url(/static/images/classification.jpg);
 }
@@ -63,6 +63,9 @@
 }
 .card_combine:nth-child(4)::before{
     background-image: url(/static/images/faultdiagnosis.jpg);
+}
+.card_combine:nth-child(5)::before{
+    background-image: url(/static/images/image_capture.jpg);
 }
 
 /* 遮罩 */

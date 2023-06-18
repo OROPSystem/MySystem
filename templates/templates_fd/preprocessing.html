@@ -6,18 +6,18 @@
 {% endblock %} {% block content %} {{ super() }}
 
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">YOU ARE HERE</li>
+  <li class="breadcrumb-item">您的位置</li>
   <li class="breadcrumb-item active">
     <a href='{{url_for('dashboard.dashboard_application')}}'>
-    Application 
+    应用程序
     </a>
   </li>
   <li class="breadcrumb-item active"> 
     <a href='{{url_for('dashboard.dashboard_fd')}}'>
-    Fault Diagnosis
+    故障诊断
     </a>
   </li>
-  <li class="breadcrumb-item active">Data Preprocessing</li>
+  <li class="breadcrumb-item active">数据预处理</li>
 </ol>
 
 <div class="iframe-container">
