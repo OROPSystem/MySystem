@@ -34,3 +34,4 @@ os.system(
     # 图像采集
     "streamlit run image_capture_app.py --server.port 8901 --server.fileWatcherType none &"
     )
+
